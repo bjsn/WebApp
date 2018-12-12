@@ -1,0 +1,1335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SDACloudModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SDACloudModelStoreContainer">
+          <EntitySet Name="AppVersion" EntityType="SDACloudModel.Store.AppVersion" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="Client" EntityType="SDACloudModel.Store.Client" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="ClientContent" EntityType="SDACloudModel.Store.ClientContent" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="ClientDefinedField" EntityType="SDACloudModel.Store.ClientDefinedField" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="ClientUpdateDB" EntityType="SDACloudModel.Store.ClientUpdateDB" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="Configuration" EntityType="SDACloudModel.Store.Configuration" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="DataTransferDT" EntityType="SDACloudModel.Store.DataTransferDT" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="Document" EntityType="SDACloudModel.Store.Document" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="ErrorLog" EntityType="SDACloudModel.Store.ErrorLog" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="EtilizeKey" EntityType="SDACloudModel.Store.EtilizeKey" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="Interface" EntityType="SDACloudModel.Store.Interface" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="InterfaceXRef" EntityType="SDACloudModel.Store.InterfaceXRef" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="Opportunity" EntityType="SDACloudModel.Store.Opportunity" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="OppStatus" EntityType="SDACloudModel.Store.OppStatus" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="Quote" EntityType="SDACloudModel.Store.Quote" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="TransactionLog" EntityType="SDACloudModel.Store.TransactionLog" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="User" EntityType="SDACloudModel.Store.User" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="UserView" EntityType="SDACloudModel.Store.UserView" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="opportunitygrid" EntityType="SDACloudModel.Store.opportunitygrid" store:Type="Views" store:Schema="TestSDA" store:Name="opportunitygrid">
+            <DefiningQuery>SELECT
+      `opportunitygrid`.`OppID`, 
+      `opportunitygrid`.`ClientID`, 
+      `opportunitygrid`.`CRMOppID`, 
+      `opportunitygrid`.`OppName`, 
+      `opportunitygrid`.`CompanyName`, 
+      `opportunitygrid`.`OppOwner`, 
+      `opportunitygrid`.`OppProbability`, 
+      `opportunitygrid`.`QuotedAmount`, 
+      `opportunitygrid`.`QuotedCost`, 
+      `opportunitygrid`.`QuotedMargin`, 
+      `opportunitygrid`.`NumofQuotes`, 
+      `opportunitygrid`.`OppCloseDate`, 
+      `opportunitygrid`.`SDALastUpdDT`, 
+      `opportunitygrid`.`CloudLastUpdDT`, 
+      `opportunitygrid`.`CreateDT`, 
+      `opportunitygrid`.`ClientDefinedTotal1`, 
+      `opportunitygrid`.`ClientDefinedTotal2`, 
+      `opportunitygrid`.`ClientDefinedTotal3`, 
+      `opportunitygrid`.`ClientDefinedTotal4`, 
+      `opportunitygrid`.`ClientDefinedTotal5`, 
+      `opportunitygrid`.`ClientDefinedTotal6`, 
+      `opportunitygrid`.`ClientDefinedTotal7`, 
+      `opportunitygrid`.`ClientDefinedTotal9`, 
+      `opportunitygrid`.`ClientDefinedTotal8`, 
+      `opportunitygrid`.`ClientDefinedTotal10`, 
+      `opportunitygrid`.`ClientDefinedText1`, 
+      `opportunitygrid`.`ClientDefinedText2`, 
+      `opportunitygrid`.`ClientDefinedText3`, 
+      `opportunitygrid`.`ClientDefinedText4`, 
+      `opportunitygrid`.`ClientDefinedText5`, 
+      `opportunitygrid`.`OppOwnerName`, 
+      `opportunitygrid`.`OppStatusId`, 
+      `opportunitygrid`.`OppStatusName`, 
+      `opportunitygrid`.`StageType`, 
+      `opportunitygrid`.`Manager`
+      FROM `opportunitygrid` AS `opportunitygrid`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Interface" Association="SDACloudModel.Store.FK_Interface">
+            <End Role="Interface" EntitySet="Interface" />
+            <End Role="DataTransferDT" EntitySet="DataTransferDT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opp_Client" Association="SDACloudModel.Store.FK_Opp_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Opportunity" EntitySet="Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opp_Quote" Association="SDACloudModel.Store.FK_Opp_Quote">
+            <End Role="Opportunity" EntitySet="Opportunity" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opp_Status" Association="SDACloudModel.Store.FK_Opp_Status">
+            <End Role="OppStatus" EntitySet="OppStatus" />
+            <End Role="Opportunity" EntitySet="Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Client" Association="SDACloudModel.Store.FK_User_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppVersion">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Version" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ClientLoginID" Type="varchar" MaxLength="45" />
+          <Property Name="ClientLoginPwd" Type="varchar" MaxLength="45" />
+          <Property Name="ClientName" Type="varchar" MaxLength="75" />
+          <Property Name="ManageOppysInCRM" Type="varchar" MaxLength="1" />
+          <Property Name="NextCRMOppID" Type="int" />
+          <Property Name="SendCRMOppValueUpdates" Type="varchar" MaxLength="1" />
+          <Property Name="CRMXrefUpdDT" Type="datetime" />
+          <Property Name="CRMSystem" Type="varchar" MaxLength="20" />
+          <Property Name="CRMData" Type="varchar" MaxLength="1" />
+          <Property Name="ClientLongName" Type="varchar" MaxLength="45" />
+          <Property Name="SDAOppMgmt" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="ClientContent">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="ContentClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ContentClientID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientDefinedField">
+          <Key>
+            <PropertyRef Name="ClientDefinedFieldID" />
+          </Key>
+          <Property Name="ClientDefinedFieldID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="InterfaceXRefID" Type="int" />
+          <Property Name="Table" Type="varchar" MaxLength="45" />
+          <Property Name="Field" Type="varchar" MaxLength="45" />
+          <Property Name="ColumnHeader" Type="varchar" MaxLength="45" />
+          <Property Name="Format" Type="varchar" MaxLength="45" />
+          <Property Name="SDARangeName" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="ClientUpdateDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="DBFileName" Type="varchar" MaxLength="45" />
+          <Property Name="DBDescription" Type="varchar" MaxLength="50" />
+          <Property Name="AWSFlePath" Type="varchar" MaxLength="200" />
+          <Property Name="AWSFileName" Type="varchar" MaxLength="45" />
+          <Property Name="AWSFileID" Type="varchar" MaxLength="45" />
+          <Property Name="DBFileUpdDT" Type="datetime" />
+          <Property Name="DBUploadedDT" Type="datetime" />
+          <Property Name="DeleteInd" Type="varchar" MaxLength="45" />
+          <Property Name="DBFileType" Type="varchar" MaxLength="50" />
+          <Property Name="BetaAwsFilePath" Type="varchar" MaxLength="200" />
+          <Property Name="BetaAWSFileName" Type="varchar" MaxLength="100" />
+          <Property Name="BetaAWSFileID" Type="varchar" MaxLength="45" />
+          <Property Name="BetaDBFileUpdDT" Type="datetime" />
+          <Property Name="UploaderClientID" Type="int" />
+          <Property Name="UploaderUserID" Type="int" />
+          <Property Name="UploaderUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="Value" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DataTransferDT">
+          <Key>
+            <PropertyRef Name="InterfaceID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Txn" />
+          </Key>
+          <Property Name="InterfaceID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Txn" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="TransferInterval" Type="int" />
+          <Property Name="DataTransferDT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="QuoteID" Type="varchar" MaxLength="255" />
+          <Property Name="DocumentType" Type="varchar" MaxLength="100" />
+          <Property Name="FilePlatformID" Type="varchar" MaxLength="100" />
+          <Property Name="LastFileSaveLocation" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDT" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="LastUpdatedDT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="ErrorMessage" Type="varchar" MaxLength="400" />
+          <Property Name="Record" Type="varchar" MaxLength="5000" />
+          <Property Name="ProcessDT" Type="datetime" />
+          <Property Name="NoLongerSend" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="EtilizeKey">
+          <Key>
+            <PropertyRef Name="EtilizeKeyID" />
+          </Key>
+          <Property Name="EtilizeKeyID" Type="int" Nullable="false" />
+          <Property Name="EtilizeSiteID" Type="varchar" MaxLength="45" />
+          <Property Name="LastRetrievedDT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interface">
+          <Key>
+            <PropertyRef Name="InterfaceID" />
+          </Key>
+          <Property Name="InterfaceID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="InterfaceSystem" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceConnectionStr" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceLogin" Type="varchar" MaxLength="45" />
+          <Property Name="InterfacePwd" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceToken" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceSessionId" Type="varchar" MaxLength="200" />
+          <Property Name="InterfaceServerURL" Type="varchar" MaxLength="200" />
+          <Property Name="InterfaceCurrentSessionCount" Type="int" />
+          <Property Name="InterfacePreviousSessionCount" Type="int" />
+          <Property Name="InterfaceLastResetTimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InterfaceXRef">
+          <Key>
+            <PropertyRef Name="InterfaceXRefID" />
+          </Key>
+          <Property Name="InterfaceXRefID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="Txn" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceTable" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceField" Type="varchar" MaxLength="45" />
+          <Property Name="InterfaceFieldType" Type="varchar" MaxLength="45" />
+          <Property Name="SDASMTable" Type="varchar" MaxLength="45" />
+          <Property Name="SDASMField" Type="varchar" MaxLength="45" />
+          <Property Name="SDASMFieldType" Type="varchar" MaxLength="45" />
+          <Property Name="SDARangeName" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Opportunity">
+          <Key>
+            <PropertyRef Name="OppID" />
+          </Key>
+          <Property Name="OppID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="CRMOppID" Type="varchar" MaxLength="75" />
+          <Property Name="OppName" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="OppOwner" Type="int" />
+          <Property Name="OppStatus" Type="int" Nullable="false" />
+          <Property Name="OppProbability" Type="int" />
+          <Property Name="QuotedAmount" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="QuotedCost" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="QuotedMargin" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="NumofQuotes" Type="int" Nullable="false" />
+          <Property Name="OppCloseDate" Type="date" />
+          <Property Name="QuoteIDMainSite" Type="varchar" MaxLength="75" />
+          <Property Name="DeleteInd" Type="char" MaxLength="1" />
+          <Property Name="SDALastUpdBy" Type="int" Nullable="false" />
+          <Property Name="SDALastUpdDT" Type="datetime" Nullable="false" />
+          <Property Name="CloudLastUpdBy" Type="int" Nullable="false" />
+          <Property Name="CloudLastUpdDT" Type="datetime" Nullable="false" />
+          <Property Name="LastCRMValuesUpdDT" Type="datetime" />
+          <Property Name="LastCRMTransferDT" Type="datetime" />
+          <Property Name="CRMLastUpdDT" Type="datetime" />
+          <Property Name="CreateDT" Type="datetime" />
+          <Property Name="CreateBy" Type="int" />
+          <Property Name="ClientDefinedTotal1" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal2" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal3" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal4" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal5" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal6" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal7" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal9" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal8" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal10" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedText1" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText2" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText3" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText4" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText5" Type="varchar" MaxLength="200" />
+          <Property Name="CRMSync" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="OppStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="OppStatus" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="OppProbability" Type="int" />
+          <Property Name="DeleteInd" Type="char" MaxLength="1" />
+          <Property Name="Default" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="StageType" Type="varchar" Nullable="false" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="QuoteID" Type="varchar" Nullable="false" MaxLength="75" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="OppID" Type="int" Nullable="false" />
+          <Property Name="CRMOppID" Type="varchar" MaxLength="75" />
+          <Property Name="QuoteSiteDesc" Type="varchar" MaxLength="250" />
+          <Property Name="QuotedAmount" Type="decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="QuotedCost" Type="decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="QuoteMargin" Type="decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="Rollup" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="LastFileSavedLocation" Type="varchar" MaxLength="255" />
+          <Property Name="FilePlatformFileID" Type="varchar" MaxLength="200" />
+          <Property Name="DeleteInd" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="SDALastUpdBy" Type="int" Nullable="false" />
+          <Property Name="SDALastUpdDT" Type="datetime" Nullable="false" />
+          <Property Name="CloudLastUpdBy" Type="int" Nullable="false" />
+          <Property Name="CloudLastUpdDT" Type="datetime" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" />
+          <Property Name="CreateBy" Type="int" />
+          <Property Name="ClientDefinedTotal1" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal2" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal3" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal4" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal5" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal6" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal7" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal8" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal9" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal10" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedText1" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText2" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText3" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText4" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText5" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="Message" Type="varchar" MaxLength="200" />
+          <Property Name="Record" Type="varchar" MaxLength="5000" />
+          <Property Name="ProcessDT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="LoginID" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="ManagerUserID" Type="int" />
+          <Property Name="Administrator" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="DeleteInd" Type="char" MaxLength="1" />
+          <Property Name="CloudLastUpdBy" Type="int" />
+          <Property Name="CloudLastUpdDT" Type="datetime" />
+          <Property Name="EmailSent" Type="varchar" MaxLength="45" />
+          <Property Name="SDAOppMgmt" Type="varchar" MaxLength="1" />
+          <Property Name="RegistrationDT" Type="datetime" />
+          <Property Name="LastCheckDT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserView">
+          <Key>
+            <PropertyRef Name="UserViewID" />
+          </Key>
+          <Property Name="UserViewID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="View" Type="varchar" MaxLength="10000" />
+          <Property Name="ViewName" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'def.TestSDA.opportunitygrid' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="opportunitygrid">
+          <Key>
+            <PropertyRef Name="OppOwnerName" />
+            <PropertyRef Name="Manager" />
+          </Key>
+          <Property Name="OppID" Type="int" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="CRMOppID" Type="varchar" MaxLength="75" />
+          <Property Name="OppName" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="OppOwner" Type="int" />
+          <Property Name="OppProbability" Type="int" />
+          <Property Name="QuotedAmount" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="QuotedCost" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="QuotedMargin" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="NumofQuotes" Type="int" />
+          <Property Name="OppCloseDate" Type="date" />
+          <Property Name="SDALastUpdDT" Type="datetime" />
+          <Property Name="CloudLastUpdDT" Type="datetime" />
+          <Property Name="CreateDT" Type="datetime" />
+          <Property Name="ClientDefinedTotal1" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal2" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal3" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal4" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal5" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal6" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal7" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal9" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal8" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedTotal10" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="ClientDefinedText1" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText2" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText3" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText4" Type="varchar" MaxLength="200" />
+          <Property Name="ClientDefinedText5" Type="varchar" MaxLength="200" />
+          <Property Name="OppOwnerName" Type="varchar" Nullable="false" MaxLength="91" />
+          <Property Name="OppStatusId" Type="int" />
+          <Property Name="OppStatusName" Type="varchar" MaxLength="45" />
+          <Property Name="StageType" Type="varchar" MaxLength="4" />
+          <Property Name="Manager" Type="varchar" Nullable="false" MaxLength="7" />
+        </EntityType>
+        <Association Name="FK_Interface">
+          <End Role="Interface" Type="SDACloudModel.Store.Interface" Multiplicity="1" />
+          <End Role="DataTransferDT" Type="SDACloudModel.Store.DataTransferDT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interface">
+              <PropertyRef Name="InterfaceID" />
+            </Principal>
+            <Dependent Role="DataTransferDT">
+              <PropertyRef Name="InterfaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opp_Client">
+          <End Role="Client" Type="SDACloudModel.Store.Client" Multiplicity="1" />
+          <End Role="Opportunity" Type="SDACloudModel.Store.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opp_Quote">
+          <End Role="Opportunity" Type="SDACloudModel.Store.Opportunity" Multiplicity="1" />
+          <End Role="Quote" Type="SDACloudModel.Store.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opportunity">
+              <PropertyRef Name="OppID" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="OppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opp_Status">
+          <End Role="OppStatus" Type="SDACloudModel.Store.OppStatus" Multiplicity="1" />
+          <End Role="Opportunity" Type="SDACloudModel.Store.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OppStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="OppStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Client">
+          <End Role="Client" Type="SDACloudModel.Store.Client" Multiplicity="1" />
+          <End Role="User" Type="SDACloudModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        
+        
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SDACloudModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SDACloudEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="returnUsers">
+          <Parameter Name="myVar" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="AppVersions" EntityType="SDACloudModel.AppVersion" />
+          <EntitySet Name="Clients" EntityType="SDACloudModel.Client" />
+          <EntitySet Name="ClientContents" EntityType="SDACloudModel.ClientContent" />
+          <EntitySet Name="ClientDefinedFields" EntityType="SDACloudModel.ClientDefinedField" />
+          <EntitySet Name="ClientUpdateDBs" EntityType="SDACloudModel.ClientUpdateDB" />
+          <EntitySet Name="Configurations" EntityType="SDACloudModel.Configuration" />
+          <EntitySet Name="DataTransferDTs" EntityType="SDACloudModel.DataTransferDT" />
+          <EntitySet Name="Documents" EntityType="SDACloudModel.Document" />
+          <EntitySet Name="ErrorLogs" EntityType="SDACloudModel.ErrorLog" />
+          <EntitySet Name="EtilizeKeys" EntityType="SDACloudModel.EtilizeKey" />
+          <EntitySet Name="Interfaces" EntityType="SDACloudModel.Interface" />
+          <EntitySet Name="InterfaceXRefs" EntityType="SDACloudModel.InterfaceXRef" />
+          <EntitySet Name="Opportunities" EntityType="SDACloudModel.Opportunity" />
+          <EntitySet Name="OppStatus" EntityType="SDACloudModel.OppStatu" />
+          <EntitySet Name="Quotes" EntityType="SDACloudModel.Quote" />
+          <EntitySet Name="TransactionLogs" EntityType="SDACloudModel.TransactionLog" />
+          <EntitySet Name="Users" EntityType="SDACloudModel.User" />
+          <EntitySet Name="UserViews" EntityType="SDACloudModel.UserView" />
+          <AssociationSet Name="FK_Opp_Client" Association="SDACloudModel.FK_Opp_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Client" Association="SDACloudModel.FK_User_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Interface" Association="SDACloudModel.FK_Interface">
+            <End Role="Interface" EntitySet="Interfaces" />
+            <End Role="DataTransferDT" EntitySet="DataTransferDTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opp_Quote" Association="SDACloudModel.FK_Opp_Quote">
+            <End Role="Opportunity" EntitySet="Opportunities" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Opp_Status" Association="SDACloudModel.FK_Opp_Status">
+            <End Role="OppStatu" EntitySet="OppStatus" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+          <EntitySet Name="opportunitygrids" EntityType="SDACloudModel.opportunitygrid" />
+          </EntityContainer>
+        <EntityType Name="AppVersion">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Version" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="ClientLoginID" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientLoginPwd" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientName" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ManageOppysInCRM" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NextCRMOppID" />
+          <Property Type="String" Name="SendCRMOppValueUpdates" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CRMXrefUpdDT" Precision="0" />
+          <Property Type="String" Name="CRMSystem" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CRMData" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientLongName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDAOppMgmt" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Opportunities" Relationship="SDACloudModel.FK_Opp_Client" FromRole="Client" ToRole="Opportunity" />
+          <NavigationProperty Name="Users" Relationship="SDACloudModel.FK_User_Client" FromRole="Client" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ClientContent">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="ContentClientID" />
+          </Key>
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="ContentClientID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientDefinedField">
+          <Key>
+            <PropertyRef Name="ClientDefinedFieldID" />
+          </Key>
+          <Property Type="Int32" Name="ClientDefinedFieldID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="Int32" Name="InterfaceXRefID" />
+          <Property Type="String" Name="Table" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Field" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ColumnHeader" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Format" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDARangeName" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ClientUpdateDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="DBFileName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DBDescription" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWSFlePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWSFileName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWSFileID" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DBFileUpdDT" Precision="0" />
+          <Property Type="DateTime" Name="DBUploadedDT" Precision="0" />
+          <Property Type="String" Name="DeleteInd" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DBFileType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BetaAwsFilePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BetaAWSFileName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BetaAWSFileID" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="BetaDBFileUpdDT" Precision="0" />
+          <Property Type="Int32" Name="UploaderClientID" />
+          <Property Type="Int32" Name="UploaderUserID" />
+          <Property Type="String" Name="UploaderUserName" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Value" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DataTransferDT">
+          <Key>
+            <PropertyRef Name="InterfaceID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Txn" />
+          </Key>
+          <Property Type="Int32" Name="InterfaceID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="Txn" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TransferInterval" />
+          <Property Type="DateTime" Name="DataTransferDT1" Precision="0" />
+          <NavigationProperty Name="Interface" Relationship="SDACloudModel.FK_Interface" FromRole="DataTransferDT" ToRole="Interface" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Type="Int32" Name="DocumentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="QuoteID" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentType" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FilePlatformID" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastFileSaveLocation" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" />
+          <Property Type="DateTime" Name="CreatedDT" Precision="0" />
+          <Property Type="Int32" Name="LastUpdatedBy" />
+          <Property Type="DateTime" Name="LastUpdatedDT" Precision="0" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="ErrorMessage" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Record" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ProcessDT" Precision="0" />
+          <Property Type="String" Name="NoLongerSend" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EtilizeKey">
+          <Key>
+            <PropertyRef Name="EtilizeKeyID" />
+          </Key>
+          <Property Type="Int32" Name="EtilizeKeyID" Nullable="false" />
+          <Property Type="String" Name="EtilizeSiteID" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastRetrievedDT" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Interface">
+          <Key>
+            <PropertyRef Name="InterfaceID" />
+          </Key>
+          <Property Type="Int32" Name="InterfaceID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="InterfaceSystem" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceConnectionStr" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceLogin" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfacePwd" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceToken" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceSessionId" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceServerURL" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="InterfaceCurrentSessionCount" />
+          <Property Type="Int32" Name="InterfacePreviousSessionCount" />
+          <Property Type="DateTime" Name="InterfaceLastResetTimeStamp" Precision="0" />
+          <NavigationProperty Name="DataTransferDTs" Relationship="SDACloudModel.FK_Interface" FromRole="Interface" ToRole="DataTransferDT" />
+        </EntityType>
+        <EntityType Name="InterfaceXRef">
+          <Key>
+            <PropertyRef Name="InterfaceXRefID" />
+          </Key>
+          <Property Type="Int32" Name="InterfaceXRefID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="Txn" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceTable" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceField" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InterfaceFieldType" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDASMTable" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDASMField" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDASMFieldType" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDARangeName" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Opportunity">
+          <Key>
+            <PropertyRef Name="OppID" />
+          </Key>
+          <Property Type="Int32" Name="OppID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="CRMOppID" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OppName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OppOwner" />
+          <Property Type="Int32" Name="OppStatus" Nullable="false" />
+          <Property Type="Int32" Name="OppProbability" />
+          <Property Type="Decimal" Name="QuotedAmount" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuotedCost" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuotedMargin" Precision="3" Scale="2" />
+          <Property Type="Int32" Name="NumofQuotes" Nullable="false" />
+          <Property Type="DateTime" Name="OppCloseDate" Precision="0" />
+          <Property Type="String" Name="QuoteIDMainSite" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DeleteInd" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="SDALastUpdBy" Nullable="false" />
+          <Property Type="DateTime" Name="SDALastUpdDT" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="CloudLastUpdBy" Nullable="false" />
+          <Property Type="DateTime" Name="CloudLastUpdDT" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="LastCRMValuesUpdDT" Precision="0" />
+          <Property Type="DateTime" Name="LastCRMTransferDT" Precision="0" />
+          <Property Type="DateTime" Name="CRMLastUpdDT" Precision="0" />
+          <Property Type="DateTime" Name="CreateDT" Precision="0" />
+          <Property Type="Int32" Name="CreateBy" />
+          <Property Type="Decimal" Name="ClientDefinedTotal1" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal2" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal3" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal4" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal5" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal6" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal7" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal9" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal8" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal10" Precision="20" Scale="2" />
+          <Property Type="String" Name="ClientDefinedText1" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText2" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText3" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText4" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText5" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CRMSync" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="SDACloudModel.FK_Opp_Client" FromRole="Opportunity" ToRole="Client" />
+          <NavigationProperty Name="Quotes" Relationship="SDACloudModel.FK_Opp_Quote" FromRole="Opportunity" ToRole="Quote" />
+          <NavigationProperty Name="OppStatu" Relationship="SDACloudModel.FK_Opp_Status" FromRole="Opportunity" ToRole="OppStatu" />
+        </EntityType>
+        <EntityType Name="OppStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="OppStatus" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Order" Nullable="false" />
+          <Property Type="Int32" Name="OppProbability" />
+          <Property Type="String" Name="DeleteInd" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Default" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="StageType" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Opportunities" Relationship="SDACloudModel.FK_Opp_Status" FromRole="OppStatu" ToRole="Opportunity" />
+        </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Type="String" Name="QuoteID" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="OppID" Nullable="false" />
+          <Property Type="String" Name="CRMOppID" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="QuoteSiteDesc" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="QuotedAmount" Nullable="false" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuotedCost" Nullable="false" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuoteMargin" Nullable="false" Precision="20" Scale="2" />
+          <Property Type="String" Name="Rollup" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastFileSavedLocation" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FilePlatformFileID" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DeleteInd" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="SDALastUpdBy" Nullable="false" />
+          <Property Type="DateTime" Name="SDALastUpdDT" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="CloudLastUpdBy" Nullable="false" />
+          <Property Type="DateTime" Name="CloudLastUpdDT" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="CreateDT" Precision="0" />
+          <Property Type="Int32" Name="CreateBy" />
+          <Property Type="Decimal" Name="ClientDefinedTotal1" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal2" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal3" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal4" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal5" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal6" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal7" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal8" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal9" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal10" Precision="20" Scale="2" />
+          <Property Type="String" Name="ClientDefinedText1" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText2" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText3" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText4" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText5" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Opportunity" Relationship="SDACloudModel.FK_Opp_Quote" FromRole="Quote" ToRole="Opportunity" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="Message" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Record" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ProcessDT" Precision="0" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="LoginID" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ManagerUserID" />
+          <Property Type="String" Name="Administrator" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="DeleteInd" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="CloudLastUpdBy" />
+          <Property Type="DateTime" Name="CloudLastUpdDT" Precision="0" />
+          <Property Type="String" Name="EmailSent" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SDAOppMgmt" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="RegistrationDT" Precision="0" />
+          <Property Type="DateTime" Name="LastCheckDT" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="SDACloudModel.FK_User_Client" FromRole="User" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="UserView">
+          <Key>
+            <PropertyRef Name="UserViewID" />
+          </Key>
+          <Property Type="Int32" Name="UserViewID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="View" MaxLength="10000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ViewName" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Opp_Client">
+          <End Type="SDACloudModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="SDACloudModel.Opportunity" Role="Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Client">
+          <End Type="SDACloudModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="SDACloudModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Interface">
+          <End Type="SDACloudModel.Interface" Role="Interface" Multiplicity="1" />
+          <End Type="SDACloudModel.DataTransferDT" Role="DataTransferDT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interface">
+              <PropertyRef Name="InterfaceID" />
+            </Principal>
+            <Dependent Role="DataTransferDT">
+              <PropertyRef Name="InterfaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opp_Quote">
+          <End Type="SDACloudModel.Opportunity" Role="Opportunity" Multiplicity="1" />
+          <End Type="SDACloudModel.Quote" Role="Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opportunity">
+              <PropertyRef Name="OppID" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="OppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opp_Status">
+          <End Type="SDACloudModel.OppStatu" Role="OppStatu" Multiplicity="1" />
+          <End Type="SDACloudModel.Opportunity" Role="Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OppStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="OppStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="opportunitygrid">
+          <Key>
+            <PropertyRef Name="OppOwnerName" />
+            <PropertyRef Name="Manager" />
+          </Key>
+          <Property Type="Int32" Name="OppID" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="CRMOppID" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OppName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OppOwner" />
+          <Property Type="Int32" Name="OppProbability" />
+          <Property Type="Decimal" Name="QuotedAmount" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuotedCost" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuotedMargin" Precision="3" Scale="2" />
+          <Property Type="Int32" Name="NumofQuotes" />
+          <Property Type="DateTime" Name="OppCloseDate" Precision="0" />
+          <Property Type="DateTime" Name="SDALastUpdDT" Precision="0" />
+          <Property Type="DateTime" Name="CloudLastUpdDT" Precision="0" />
+          <Property Type="DateTime" Name="CreateDT" Precision="0" />
+          <Property Type="Decimal" Name="ClientDefinedTotal1" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal2" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal3" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal4" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal5" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal6" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal7" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal9" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal8" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="ClientDefinedTotal10" Precision="20" Scale="2" />
+          <Property Type="String" Name="ClientDefinedText1" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText2" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText3" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText4" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClientDefinedText5" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OppOwnerName" Nullable="false" MaxLength="91" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OppStatusId" />
+          <Property Type="String" Name="OppStatusName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StageType" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Manager" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SDACloudModelStoreContainer" CdmEntityContainer="SDACloudEntities">
+          <EntitySetMapping Name="AppVersions">
+            <EntityTypeMapping TypeName="SDACloudModel.AppVersion">
+              <MappingFragment StoreEntitySet="AppVersion">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SDACloudModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="SDAOppMgmt" ColumnName="SDAOppMgmt" />
+                <ScalarProperty Name="ClientLongName" ColumnName="ClientLongName" />
+                <ScalarProperty Name="CRMData" ColumnName="CRMData" />
+                <ScalarProperty Name="CRMSystem" ColumnName="CRMSystem" />
+                <ScalarProperty Name="CRMXrefUpdDT" ColumnName="CRMXrefUpdDT" />
+                <ScalarProperty Name="SendCRMOppValueUpdates" ColumnName="SendCRMOppValueUpdates" />
+                <ScalarProperty Name="NextCRMOppID" ColumnName="NextCRMOppID" />
+                <ScalarProperty Name="ManageOppysInCRM" ColumnName="ManageOppysInCRM" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientLoginPwd" ColumnName="ClientLoginPwd" />
+                <ScalarProperty Name="ClientLoginID" ColumnName="ClientLoginID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientContents">
+            <EntityTypeMapping TypeName="SDACloudModel.ClientContent">
+              <MappingFragment StoreEntitySet="ClientContent">
+                <ScalarProperty Name="ContentClientID" ColumnName="ContentClientID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientDefinedFields">
+            <EntityTypeMapping TypeName="SDACloudModel.ClientDefinedField">
+              <MappingFragment StoreEntitySet="ClientDefinedField">
+                <ScalarProperty Name="SDARangeName" ColumnName="SDARangeName" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="ColumnHeader" ColumnName="ColumnHeader" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="Table" ColumnName="Table" />
+                <ScalarProperty Name="InterfaceXRefID" ColumnName="InterfaceXRefID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientDefinedFieldID" ColumnName="ClientDefinedFieldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientUpdateDBs">
+            <EntityTypeMapping TypeName="SDACloudModel.ClientUpdateDB">
+              <MappingFragment StoreEntitySet="ClientUpdateDB">
+                <ScalarProperty Name="UploaderUserName" ColumnName="UploaderUserName" />
+                <ScalarProperty Name="UploaderUserID" ColumnName="UploaderUserID" />
+                <ScalarProperty Name="UploaderClientID" ColumnName="UploaderClientID" />
+                <ScalarProperty Name="BetaDBFileUpdDT" ColumnName="BetaDBFileUpdDT" />
+                <ScalarProperty Name="BetaAWSFileID" ColumnName="BetaAWSFileID" />
+                <ScalarProperty Name="BetaAWSFileName" ColumnName="BetaAWSFileName" />
+                <ScalarProperty Name="BetaAwsFilePath" ColumnName="BetaAwsFilePath" />
+                <ScalarProperty Name="DBFileType" ColumnName="DBFileType" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="DBUploadedDT" ColumnName="DBUploadedDT" />
+                <ScalarProperty Name="DBFileUpdDT" ColumnName="DBFileUpdDT" />
+                <ScalarProperty Name="AWSFileID" ColumnName="AWSFileID" />
+                <ScalarProperty Name="AWSFileName" ColumnName="AWSFileName" />
+                <ScalarProperty Name="AWSFlePath" ColumnName="AWSFlePath" />
+                <ScalarProperty Name="DBDescription" ColumnName="DBDescription" />
+                <ScalarProperty Name="DBFileName" ColumnName="DBFileName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configurations">
+            <EntityTypeMapping TypeName="SDACloudModel.Configuration">
+              <MappingFragment StoreEntitySet="Configuration">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataTransferDTs">
+            <EntityTypeMapping TypeName="SDACloudModel.DataTransferDT">
+              <MappingFragment StoreEntitySet="DataTransferDT">
+                <ScalarProperty Name="DataTransferDT1" ColumnName="DataTransferDT" />
+                <ScalarProperty Name="TransferInterval" ColumnName="TransferInterval" />
+                <ScalarProperty Name="Txn" ColumnName="Txn" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="InterfaceID" ColumnName="InterfaceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="SDACloudModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="LastUpdatedDT" ColumnName="LastUpdatedDT" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDT" ColumnName="CreatedDT" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastFileSaveLocation" ColumnName="LastFileSaveLocation" />
+                <ScalarProperty Name="FilePlatformID" ColumnName="FilePlatformID" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="SDACloudModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="NoLongerSend" ColumnName="NoLongerSend" />
+                <ScalarProperty Name="ProcessDT" ColumnName="ProcessDT" />
+                <ScalarProperty Name="Record" ColumnName="Record" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EtilizeKeys">
+            <EntityTypeMapping TypeName="SDACloudModel.EtilizeKey">
+              <MappingFragment StoreEntitySet="EtilizeKey">
+                <ScalarProperty Name="LastRetrievedDT" ColumnName="LastRetrievedDT" />
+                <ScalarProperty Name="EtilizeSiteID" ColumnName="EtilizeSiteID" />
+                <ScalarProperty Name="EtilizeKeyID" ColumnName="EtilizeKeyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interfaces">
+            <EntityTypeMapping TypeName="SDACloudModel.Interface">
+              <MappingFragment StoreEntitySet="Interface">
+                <ScalarProperty Name="InterfaceLastResetTimeStamp" ColumnName="InterfaceLastResetTimeStamp" />
+                <ScalarProperty Name="InterfacePreviousSessionCount" ColumnName="InterfacePreviousSessionCount" />
+                <ScalarProperty Name="InterfaceCurrentSessionCount" ColumnName="InterfaceCurrentSessionCount" />
+                <ScalarProperty Name="InterfaceServerURL" ColumnName="InterfaceServerURL" />
+                <ScalarProperty Name="InterfaceSessionId" ColumnName="InterfaceSessionId" />
+                <ScalarProperty Name="InterfaceToken" ColumnName="InterfaceToken" />
+                <ScalarProperty Name="InterfacePwd" ColumnName="InterfacePwd" />
+                <ScalarProperty Name="InterfaceLogin" ColumnName="InterfaceLogin" />
+                <ScalarProperty Name="InterfaceConnectionStr" ColumnName="InterfaceConnectionStr" />
+                <ScalarProperty Name="InterfaceSystem" ColumnName="InterfaceSystem" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="InterfaceID" ColumnName="InterfaceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterfaceXRefs">
+            <EntityTypeMapping TypeName="SDACloudModel.InterfaceXRef">
+              <MappingFragment StoreEntitySet="InterfaceXRef">
+                <ScalarProperty Name="SDARangeName" ColumnName="SDARangeName" />
+                <ScalarProperty Name="SDASMFieldType" ColumnName="SDASMFieldType" />
+                <ScalarProperty Name="SDASMField" ColumnName="SDASMField" />
+                <ScalarProperty Name="SDASMTable" ColumnName="SDASMTable" />
+                <ScalarProperty Name="InterfaceFieldType" ColumnName="InterfaceFieldType" />
+                <ScalarProperty Name="InterfaceField" ColumnName="InterfaceField" />
+                <ScalarProperty Name="InterfaceTable" ColumnName="InterfaceTable" />
+                <ScalarProperty Name="Txn" ColumnName="Txn" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="InterfaceXRefID" ColumnName="InterfaceXRefID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Opportunities">
+            <EntityTypeMapping TypeName="SDACloudModel.Opportunity">
+              <MappingFragment StoreEntitySet="Opportunity">
+                <ScalarProperty Name="CRMSync" ColumnName="CRMSync" />
+                <ScalarProperty Name="ClientDefinedText5" ColumnName="ClientDefinedText5" />
+                <ScalarProperty Name="ClientDefinedText4" ColumnName="ClientDefinedText4" />
+                <ScalarProperty Name="ClientDefinedText3" ColumnName="ClientDefinedText3" />
+                <ScalarProperty Name="ClientDefinedText2" ColumnName="ClientDefinedText2" />
+                <ScalarProperty Name="ClientDefinedText1" ColumnName="ClientDefinedText1" />
+                <ScalarProperty Name="ClientDefinedTotal10" ColumnName="ClientDefinedTotal10" />
+                <ScalarProperty Name="ClientDefinedTotal8" ColumnName="ClientDefinedTotal8" />
+                <ScalarProperty Name="ClientDefinedTotal9" ColumnName="ClientDefinedTotal9" />
+                <ScalarProperty Name="ClientDefinedTotal7" ColumnName="ClientDefinedTotal7" />
+                <ScalarProperty Name="ClientDefinedTotal6" ColumnName="ClientDefinedTotal6" />
+                <ScalarProperty Name="ClientDefinedTotal5" ColumnName="ClientDefinedTotal5" />
+                <ScalarProperty Name="ClientDefinedTotal4" ColumnName="ClientDefinedTotal4" />
+                <ScalarProperty Name="ClientDefinedTotal3" ColumnName="ClientDefinedTotal3" />
+                <ScalarProperty Name="ClientDefinedTotal2" ColumnName="ClientDefinedTotal2" />
+                <ScalarProperty Name="ClientDefinedTotal1" ColumnName="ClientDefinedTotal1" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="CRMLastUpdDT" ColumnName="CRMLastUpdDT" />
+                <ScalarProperty Name="LastCRMTransferDT" ColumnName="LastCRMTransferDT" />
+                <ScalarProperty Name="LastCRMValuesUpdDT" ColumnName="LastCRMValuesUpdDT" />
+                <ScalarProperty Name="CloudLastUpdDT" ColumnName="CloudLastUpdDT" />
+                <ScalarProperty Name="CloudLastUpdBy" ColumnName="CloudLastUpdBy" />
+                <ScalarProperty Name="SDALastUpdDT" ColumnName="SDALastUpdDT" />
+                <ScalarProperty Name="SDALastUpdBy" ColumnName="SDALastUpdBy" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="QuoteIDMainSite" ColumnName="QuoteIDMainSite" />
+                <ScalarProperty Name="OppCloseDate" ColumnName="OppCloseDate" />
+                <ScalarProperty Name="NumofQuotes" ColumnName="NumofQuotes" />
+                <ScalarProperty Name="QuotedMargin" ColumnName="QuotedMargin" />
+                <ScalarProperty Name="QuotedCost" ColumnName="QuotedCost" />
+                <ScalarProperty Name="QuotedAmount" ColumnName="QuotedAmount" />
+                <ScalarProperty Name="OppProbability" ColumnName="OppProbability" />
+                <ScalarProperty Name="OppStatus" ColumnName="OppStatus" />
+                <ScalarProperty Name="OppOwner" ColumnName="OppOwner" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="OppName" ColumnName="OppName" />
+                <ScalarProperty Name="CRMOppID" ColumnName="CRMOppID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="OppID" ColumnName="OppID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OppStatus">
+            <EntityTypeMapping TypeName="SDACloudModel.OppStatu">
+              <MappingFragment StoreEntitySet="OppStatus">
+                <ScalarProperty Name="StageType" ColumnName="StageType" />
+                <ScalarProperty Name="Default" ColumnName="Default" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="OppProbability" ColumnName="OppProbability" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="OppStatus" ColumnName="OppStatus" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotes">
+            <EntityTypeMapping TypeName="SDACloudModel.Quote">
+              <MappingFragment StoreEntitySet="Quote">
+                <ScalarProperty Name="ClientDefinedText5" ColumnName="ClientDefinedText5" />
+                <ScalarProperty Name="ClientDefinedText4" ColumnName="ClientDefinedText4" />
+                <ScalarProperty Name="ClientDefinedText3" ColumnName="ClientDefinedText3" />
+                <ScalarProperty Name="ClientDefinedText2" ColumnName="ClientDefinedText2" />
+                <ScalarProperty Name="ClientDefinedText1" ColumnName="ClientDefinedText1" />
+                <ScalarProperty Name="ClientDefinedTotal10" ColumnName="ClientDefinedTotal10" />
+                <ScalarProperty Name="ClientDefinedTotal9" ColumnName="ClientDefinedTotal9" />
+                <ScalarProperty Name="ClientDefinedTotal8" ColumnName="ClientDefinedTotal8" />
+                <ScalarProperty Name="ClientDefinedTotal7" ColumnName="ClientDefinedTotal7" />
+                <ScalarProperty Name="ClientDefinedTotal6" ColumnName="ClientDefinedTotal6" />
+                <ScalarProperty Name="ClientDefinedTotal5" ColumnName="ClientDefinedTotal5" />
+                <ScalarProperty Name="ClientDefinedTotal4" ColumnName="ClientDefinedTotal4" />
+                <ScalarProperty Name="ClientDefinedTotal3" ColumnName="ClientDefinedTotal3" />
+                <ScalarProperty Name="ClientDefinedTotal2" ColumnName="ClientDefinedTotal2" />
+                <ScalarProperty Name="ClientDefinedTotal1" ColumnName="ClientDefinedTotal1" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="CloudLastUpdDT" ColumnName="CloudLastUpdDT" />
+                <ScalarProperty Name="CloudLastUpdBy" ColumnName="CloudLastUpdBy" />
+                <ScalarProperty Name="SDALastUpdDT" ColumnName="SDALastUpdDT" />
+                <ScalarProperty Name="SDALastUpdBy" ColumnName="SDALastUpdBy" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="FilePlatformFileID" ColumnName="FilePlatformFileID" />
+                <ScalarProperty Name="LastFileSavedLocation" ColumnName="LastFileSavedLocation" />
+                <ScalarProperty Name="Rollup" ColumnName="Rollup" />
+                <ScalarProperty Name="QuoteMargin" ColumnName="QuoteMargin" />
+                <ScalarProperty Name="QuotedCost" ColumnName="QuotedCost" />
+                <ScalarProperty Name="QuotedAmount" ColumnName="QuotedAmount" />
+                <ScalarProperty Name="QuoteSiteDesc" ColumnName="QuoteSiteDesc" />
+                <ScalarProperty Name="CRMOppID" ColumnName="CRMOppID" />
+                <ScalarProperty Name="OppID" ColumnName="OppID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionLogs">
+            <EntityTypeMapping TypeName="SDACloudModel.TransactionLog">
+              <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="ProcessDT" ColumnName="ProcessDT" />
+                <ScalarProperty Name="Record" ColumnName="Record" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SDACloudModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="LastCheckDT" ColumnName="LastCheckDT" />
+                <ScalarProperty Name="RegistrationDT" ColumnName="RegistrationDT" />
+                <ScalarProperty Name="SDAOppMgmt" ColumnName="SDAOppMgmt" />
+                <ScalarProperty Name="EmailSent" ColumnName="EmailSent" />
+                <ScalarProperty Name="CloudLastUpdDT" ColumnName="CloudLastUpdDT" />
+                <ScalarProperty Name="CloudLastUpdBy" ColumnName="CloudLastUpdBy" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="Administrator" ColumnName="Administrator" />
+                <ScalarProperty Name="ManagerUserID" ColumnName="ManagerUserID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserViews">
+            <EntityTypeMapping TypeName="SDACloudModel.UserView">
+              <MappingFragment StoreEntitySet="UserView">
+                <ScalarProperty Name="ViewName" ColumnName="ViewName" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="UserViewID" ColumnName="UserViewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="opportunitygrids">
+            <EntityTypeMapping TypeName="SDACloudModel.opportunitygrid">
+              <MappingFragment StoreEntitySet="opportunitygrid">
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="StageType" ColumnName="StageType" />
+                <ScalarProperty Name="OppStatusName" ColumnName="OppStatusName" />
+                <ScalarProperty Name="OppStatusId" ColumnName="OppStatusId" />
+                <ScalarProperty Name="OppOwnerName" ColumnName="OppOwnerName" />
+                <ScalarProperty Name="ClientDefinedText5" ColumnName="ClientDefinedText5" />
+                <ScalarProperty Name="ClientDefinedText4" ColumnName="ClientDefinedText4" />
+                <ScalarProperty Name="ClientDefinedText3" ColumnName="ClientDefinedText3" />
+                <ScalarProperty Name="ClientDefinedText2" ColumnName="ClientDefinedText2" />
+                <ScalarProperty Name="ClientDefinedText1" ColumnName="ClientDefinedText1" />
+                <ScalarProperty Name="ClientDefinedTotal10" ColumnName="ClientDefinedTotal10" />
+                <ScalarProperty Name="ClientDefinedTotal8" ColumnName="ClientDefinedTotal8" />
+                <ScalarProperty Name="ClientDefinedTotal9" ColumnName="ClientDefinedTotal9" />
+                <ScalarProperty Name="ClientDefinedTotal7" ColumnName="ClientDefinedTotal7" />
+                <ScalarProperty Name="ClientDefinedTotal6" ColumnName="ClientDefinedTotal6" />
+                <ScalarProperty Name="ClientDefinedTotal5" ColumnName="ClientDefinedTotal5" />
+                <ScalarProperty Name="ClientDefinedTotal4" ColumnName="ClientDefinedTotal4" />
+                <ScalarProperty Name="ClientDefinedTotal3" ColumnName="ClientDefinedTotal3" />
+                <ScalarProperty Name="ClientDefinedTotal2" ColumnName="ClientDefinedTotal2" />
+                <ScalarProperty Name="ClientDefinedTotal1" ColumnName="ClientDefinedTotal1" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="CloudLastUpdDT" ColumnName="CloudLastUpdDT" />
+                <ScalarProperty Name="SDALastUpdDT" ColumnName="SDALastUpdDT" />
+                <ScalarProperty Name="OppCloseDate" ColumnName="OppCloseDate" />
+                <ScalarProperty Name="NumofQuotes" ColumnName="NumofQuotes" />
+                <ScalarProperty Name="QuotedMargin" ColumnName="QuotedMargin" />
+                <ScalarProperty Name="QuotedCost" ColumnName="QuotedCost" />
+                <ScalarProperty Name="QuotedAmount" ColumnName="QuotedAmount" />
+                <ScalarProperty Name="OppProbability" ColumnName="OppProbability" />
+                <ScalarProperty Name="OppOwner" ColumnName="OppOwner" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="OppName" ColumnName="OppName" />
+                <ScalarProperty Name="CRMOppID" ColumnName="CRMOppID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="OppID" ColumnName="OppID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SDACloudModel" ZoomLevel="76">
+        <EntityTypeShape EntityType="SDACloudModel.AppVersion" Width="1.5" PointX="2.9872444043807889" PointY="30.580763950283064" />
+        <EntityTypeShape EntityType="SDACloudModel.Client" Width="1.5" PointX="10.061835859930998" PointY="23.237054716440408" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientContent" Width="1.5" PointX="9.625" PointY="4.5" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientDefinedField" Width="1.5" PointX="8.7753173898790582" PointY="21.785606945765021" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientUpdateDB" Width="1.5" PointX="9.8153744739551918" PointY="27.896421847816754" />
+        <EntityTypeShape EntityType="SDACloudModel.Configuration" Width="1.5" PointX="7.5913821661804715" PointY="21.379674459518714" />
+        <EntityTypeShape EntityType="SDACloudModel.DataTransferDT" Width="1.5" PointX="3.7872462849073329" PointY="10.950189535948535" />
+        <EntityTypeShape EntityType="SDACloudModel.Document" Width="1.5" PointX="7" PointY="3.625" />
+        <EntityTypeShape EntityType="SDACloudModel.ErrorLog" Width="1.5" PointX="5.7128851011921116" PointY="22.036096642741978" />
+        <EntityTypeShape EntityType="SDACloudModel.EtilizeKey" Width="1.5" PointX="8.8032994516209229" PointY="14.326458594913808" />
+        <EntityTypeShape EntityType="SDACloudModel.Interface" Width="1.5" PointX="9.83125317368249" PointY="12.626771679439941" />
+        <EntityTypeShape EntityType="SDACloudModel.InterfaceXRef" Width="1.5" PointX="1.180132605684983" PointY="31.232460543155884" />
+        <EntityTypeShape EntityType="SDACloudModel.Opportunity" Width="1.5" PointX="10.301367429225412" PointY="31.93276172873227" />
+        <EntityTypeShape EntityType="SDACloudModel.OppStatu" Width="1.5" PointX="0.57317794141041944" PointY="24.286800038203037" />
+        <EntityTypeShape EntityType="SDACloudModel.Quote" Width="1.5" PointX="10.365137954412557" PointY="8.29008970050611" />
+        <EntityTypeShape EntityType="SDACloudModel.TransactionLog" Width="1.5" PointX="10.206547546296635" PointY="8.35203916223349" />
+        <EntityTypeShape EntityType="SDACloudModel.User" Width="1.5" PointX="11.275284301152119" PointY="9.05929555420731" />
+        <EntityTypeShape EntityType="SDACloudModel.UserView" Width="1.5" PointX="1.3256982235823285" PointY="29.703171535256864" />
+        <AssociationConnector Association="SDACloudModel.FK_Opp_Client" />
+        <AssociationConnector Association="SDACloudModel.FK_User_Client" />
+        <AssociationConnector Association="SDACloudModel.FK_Interface" />
+        <AssociationConnector Association="SDACloudModel.FK_Opp_Quote" />
+        <AssociationConnector Association="SDACloudModel.FK_Opp_Status" />
+        <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="11.414570683340809" PointY="5.1910670721861845" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

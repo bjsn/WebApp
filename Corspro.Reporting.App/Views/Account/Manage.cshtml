@@ -1,0 +1,29 @@
+﻿@using Corspro.Domain.Dto
+@model Corspro.Reporting.App.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+@{ var user = (UserDto)HttpContext.Current.Session["AuthenticatedUser"]; }
+@if (user != null)
+{
+    <p>You're logged in as <strong>@(user.FirstName + " " + user.LastName)</strong>.</p>
+}
+
+@*@if (ViewBag.HasLocalPassword)
+{*@
+    @Html.Partial("_ChangePasswordPartial")
+@*}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
+}*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

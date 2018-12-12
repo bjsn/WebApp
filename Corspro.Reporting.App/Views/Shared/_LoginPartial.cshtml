@@ -1,0 +1,15 @@
+﻿@using Corspro.Domain.Dto
+@{ var user = (UserDto)HttpContext.Current.Session["AuthenticatedUser"]; }
+@if (user != null) {
+    <text>
+        Hello, @Html.ActionLink((user.FirstName + " " + user.LastName), "Manage", "Account")!
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a id="logoffLink" href="javascript:document.getElementById('logoutForm').submit();sessvars.$.clearMem();">Log off</a>
+        }
+    </text>
+} else {
+    <ul>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

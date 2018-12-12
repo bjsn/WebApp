@@ -1,0 +1,299 @@
+﻿@{
+    ViewBag.Title = "Opportunities";
+}
+@section Styles {
+    @Styles.Render("~/Content/grid/css")
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+            <div style="vertical-align:top; height:55px">
+                <div style="height: 55px; vertical-align: middle; display: inline-block;"><h2>SalesDoc Architect</h2></div><div style="height:55px;display:inline-block;"><h1>|</h1></div><div style="height:55px;display:inline-block;"><h1>@ViewBag.Title</h1></div>
+             </div>
+            </hgroup>
+        </div>
+    </section>
+}
+<section id="index" style="height: 620px; width: 100%">
+    <div id="divLoadding" style="display:none; width:100%;"><img src="Images/ajax-loader-circle.gif" alt="Loadding"/></div>
+
+    <div id='jqxWidget' style="font-size: 12px;height: 95%; font-family: Verdana;">
+
+    <div class="jqx-widget jqx-widget-header" style="width: 100%;vertical-align:middle">
+        <div style='float: left; width: 40%;display:inline-block;'>
+
+            <div id="stageCDMenu"  style="visibility:hidden; display:inline-block;vertical-align:middle;">
+            <ul>
+                <li id="StageCloseDate"><b>Close Date/Stage Type</b>
+                    <ul style='width: 450px;'>
+                        <li style='list-style: none;' ignoretheme='true'>
+                        <div>
+                            <ul class='megamenu-ul' style="font-family: Verdana,Arial,sans-serif;font-style: normal;font-size: 13px;"> 
+                                <li style="font-style: italic;">Please check all that apply</li>
+			        <li><div >&nbsp;</div></li>
+                                <li style="text-align: center;font-size: 16px;list-style: none;"><b>Close Date</b></li>
+                                <li>
+                                    <table width="100%" style="display: inline-table;">
+                                        <tr><td width="33%"><div id="CD_ThisMonth">This Month</div></td><td width="33%"><div id="CD_NextMonth">Next Month</div></td><td><div id="CD_LastMonth">Last Month</div></td></tr>
+                                        <tr><td width="33%"><div id="CD_ThisQuarter">This Quarter</div></td><td width="33%"><div id="CD_LastQuarter">Last Quarter</div></td><td><div id="CD_NextQuarter">Next Quarter</div></td></tr>
+                                        <tr><td width="33%"><div id="CD_DateRange">Date Range</div></td><td colspan="2"><div style="font-style: italic; font-size: small; display: inline-block;width: 20%;vertical-align: super;">From:</div><div  style='display:inline-block;width: 10%;'></div><div style="display: inline-block;" id='drInitialDate'></div></td></tr>
+                                        <tr><td width="33%"></td><td colspan="2"><div style="font-style: italic; font-size: small; display: inline-block;width: 20%;vertical-align: super;">To:</div><div  style='display:inline-block;width: 10%;'></div><div style="display: inline-block;" id='drFinalDate'></div></td></tr>
+                                    </table>
+                                </li>
+				<li><div >&nbsp;</div></li>
+                                <li style="text-align: center;font-size: 16px;list-style: none;"><b>Stage Type</b></li>
+                                <li>
+                                    <table width="100%" style="display: inline-table;">
+                                        <tr><td width="33%"><div id="S_Open">Open</div></td><td width="33%"><div id="S_Won">Won</div></td><td><div id="S_Lost">Lost</div></td></tr>
+                                    </table>
+                                </li>
+                                <li><div >&nbsp;</div></li>
+                                <li style="text-align: center;list-style: none;"><div id="S_Apply" style='display:inline-block;width: 20%;'>Apply</div>
+                                        <div  style='display:inline-block;'></div>
+                                        <div id="S_Cancel" style='display:inline-block;width: 20%;'>Cancel</div>
+                                </li>
+                                <li><div >&nbsp;</div></li>
+                            </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+            <div style="width:2%;display:inline-block;">        </div>
+        <b><div id="menu_top" style="visibility:hidden;display:inline-block;vertical-align:middle;"></div ></b>
+        </div>
+        <div style="width:20%;display:inline-block;">        </div>
+        <div style='float: right; display:inline-block;'>
+            <div id="addrowbutton" style="display:inline-block;"><b>Add</b></div>
+            <div id="editrowbutton" style="display:inline-block;"><b>Edit</b></div>  
+            <div id="delrowbutton" style="display:inline-block;"><b>Delete</b></div> 
+            <div id="refreshbutton"  style="display:inline-block;"><b>Refresh</b></div>
+            <div id="exportbutton" style="display:inline-block;"><b>Export</b></div>
+        </div>
+                </div>
+    
+
+    <div style="width: 100%; height: 5%;font-size: 13px; font-family: Verdana;float: left;" ><div style="float:left;" id="dateTitle"></div><div  id="viewTitle"></div></div>
+
+        <div style="width: 100%; height: 95%; " class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content" role="grid" id="jqxgrid" align="left">
+	
+        </div>
+        </div>   
+    
+    <div style="margin-top: 2px;">
+        <div id="cellbegineditevent"></div>
+        <div style="margin-top: 2px;" id="cellendeditevent"></div>
+    </div>
+
+
+         <div id="saveNewWdw" style="display:none">
+            <div>Save current view as...</div>
+            <div>
+                <table>
+                    <tr>
+                        <td align="right">View Name:</td>
+                        <td align="left"><input id="viewName" maxlength="25"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right"></td>
+                        <td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="SaveViewName" value="Save" /><input id="CancelViewName" type="button" value="Cancel" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="popupUserViews" style="display:none">
+            <div id="popupUVTitle" style="font-weight:bold">User Views </div>
+            <div>
+                <table width="100%">
+                    <tr style="width:100%">
+                        <td style="width:100%" colspan=2>
+                            <div style="width: 100%; height: 95%;" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content" role="grid" id="jqxgridUserViews" align="left"></div>
+                        </td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td style="width:75%">
+                            <input id="deleteUserView" type="button" value="Delete Selected View(s)"/>
+                        </td>                        
+                        <td style="width:25%; text-align:right">
+                            <input id="closeUVWndw" type="button" value="Close"/>
+                        </td> 
+                    </tr>
+                </table>            
+            </div>
+        </div>
+
+        <div id="popupWindow" style="display:none">
+            <div id="oppPopupTitle">Edit</div>
+            <div>
+            <div>
+            <table><tr><td>
+            <div style="width:100%; height:298px;overflow-y:scroll;overflow-x:hidden;">
+                <table>
+                    <tr>
+                        <td align="right">Opportunity ID: <input type="hidden" id="oppId" /></td>
+                        <td align="left"><input id="crmOppId" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Opportunity Name:</td>
+                        <td align="left"><input id="oppName" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Customer Name:</td>
+                        <td align="left"><input id="companyName" /></td>
+                    </tr>        
+                    <tr>
+                        <td align="right">Total Sell:</td>
+                        <td align="left">$<input style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text" id="quotedAmtInput" /></td>
+                    </tr>                    
+                    <tr id="TRCloseDate" style="display:none;">
+                        <td align="right">Close Date:</td>
+                        <td align="left"><div id='closeDate'></div></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Owner:</td>
+                        <td align="left">
+                            <div id='owner'></div>
+                        </td>
+                    </tr>
+                    <tr id="TRProbability" style="display:none;">
+                        <td align="right">Probability:</td>
+                        <td align="left"><div style="line-height: 25px;display:inline-block;vertical-align:text-bottom;" id='probability'></div><div style="font-size: 12px;display:inline-block; font-family: Verdana;"> %</div></td>
+                    </tr>
+                    <tr id="TRStatus" style="display:none;">
+                        <td align="right">Status:</td>
+                        <td align="left">
+                            <div id='oppStatus'></div>
+                        </td>
+                    </tr>
+                    <tr id="TRcdfTotal1" style="display:none;">
+                        <td align="right" id="TxtcdfTotal1">Client Defined Field1:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal1" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal2" style="display:none;">
+                        <td align="right" id="TxtcdfTotal2">Client Defined Field2:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal2" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal3" style="display:none;">
+                        <td align="right" id="TxtcdfTotal3">Client Defined Field3:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal3" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal4" style="display:none;">
+                        <td align="right" id="TxtcdfTotal4">Client Defined Field4:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal4" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal5" style="display:none;">
+                        <td align="right" id="TxtcdfTotal5">Client Defined Field5:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal5" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal6" style="display:none;">
+                        <td align="right" id="TxtcdfTotal6">Client Defined Field6:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal6" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal7" style="display:none;">
+                        <td align="right" id="TxtcdfTotal7">Client Defined Field7:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal7" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal8" style="display:none;">
+                        <td align="right" id="TxtcdfTotal8">Client Defined Field8:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal8" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal9" style="display:none;">
+                        <td align="right" id="TxtcdfTotal9">Client Defined Field9:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal9" /></td>
+                    </tr>
+                    <tr id="TRcdfTotal10" style="display:none;">
+                        <td align="right" id="TxtcdfTotal10">Client Defined Field10:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfTotal10" /></td>
+                    </tr>
+                    <tr id="TRcdfText1" style="display:none;">
+                        <td align="right" id="TxtcdfText1">Client Defined Field1:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfText1" /></td>
+                    </tr>
+                    <tr id="TRcdfText2" style="display:none;">
+                        <td align="right" id="TxtcdfText2">Client Defined Field2:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfText2" /></td>
+                    </tr>
+                    <tr id="TRcdfText3" style="display:none;">
+                        <td align="right" id="TxtcdfText3">Client Defined Field3:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfText3" /></td>
+                    </tr>
+                    <tr id="TRcdfText4" style="display:none;">
+                        <td align="right" id="TxtcdfText4">Client Defined Field4:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfText4" /></td>
+                    </tr>
+                     <tr id="TRcdfText5" style="display:none;">
+                        <td align="right" id="TxtcdfText5">Client Defined Field5:</td>
+                        <td align="left"><input  style="font-size: 12px;height: 23px;width: 190px; font-family: Verdana;" type="text"  id="cdfText5" />
+                        <input type="hidden" id="quotedCost" />
+                            <input type="hidden" id="quotedMargin" />
+                            <input type="hidden" id="numQuotes" />
+                            <input type="hidden" id="createDT" /></td>
+                    </tr>
+                </table>
+                </div>
+                </td></tr>
+                <tr>
+                <td align="right">
+                <input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" />
+                </td>
+                </tr></table>
+                </div>
+                </div>
+                </div>
+        
+        <div id="popupQuotes" style="display:none">
+            <div id="popupTitle" style="font-weight:bold">Quotes </div>
+            <div>
+                <table width="100%">
+                    <tr style="width:100%">
+                        <td style="width:100%" colspan=2>
+                            <div style="width: 100%; height: 95%;" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content" role="grid" id="jqxgridQuotes" align="left"></div>
+                        </td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td style="width:75%">
+                            <input id="reassignOpportunity" type="button" value="Reassign Opportunity"/>
+                            <input id="deleteQuote" type="button" value="Delete Quote(s)"/>
+                        </td>                        
+                        <td style="width:25%; text-align:right">
+                            <input id="closeQuoteWndw" type="button" value="Close"/>
+                        </td> 
+                    </tr>
+<tr>
+<td>
+                            <div id="dvData"  class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content" role="grid"  ></div>
+</td>
+</tr>
+                </table>            
+            </div>
+        </div>
+
+        <div id="popupReassignQuotes" style="display:none">
+            <div>Reassign Quotes </div>
+            <div>
+                <table width="100%">
+                    <tr style="width:100%">
+                        <td style="width:100%" colspan=2>
+                            <div style="width: 95%; height: 95%;" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content" role="grid" id="jqxgridReassignOpp" align="left"></div>
+                        </td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td style="width:75%">
+                            <input id="removeFilter" disabled="disabled" type="button" value="Remove Filter"/>
+                            <input id="reassign" disabled="disabled" type="button" value="Reassign"/>
+                        </td>                        
+                        <td style="width:25%; text-align:right">
+                            <input id="closeWindow" type="button" value="Close"/>
+                        </td>    
+                    </tr>
+                </table>            
+            </div>
+        </div>         
+</section>
+@section scripts
+{
+    @Scripts.Render("~/bundles/opportunitywidgets")
+}

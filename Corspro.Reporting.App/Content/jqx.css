@@ -1,0 +1,219 @@
+﻿
+/*Reset Style*/
+
+
+.jqx-clear {
+    align:left; valign:top; left: 0px; top: 0px; -webkit-appearance: none !important; outline: none !important; padding: 0px; margin: 0px;
+}
+.jqx-popup {
+    box-sizing: content-box;
+}
+.jqx-border-reset {
+    border: none !important;
+}
+.jqx-overflow-hidden {
+    overflow: hidden !important;
+}
+.jqx-position-relative {
+    position: relative !important;
+}
+.jqx-position-absolute {
+    position: absolute !important;
+}
+.jqx-max-size {
+    width: 100% !important;
+    height: 100% !important;
+}
+.jqx-background-reset {
+    background: transparent !important;
+}
+
+
+input.button_add {
+    background-image: url(/Images/buttonAdd.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 80px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_edit {
+    background-image: url(/Images/buttonEdit.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 80px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_delete {
+    background-image: url(/Images/buttonDelete.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 90px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_find {
+    background-image: url(/Images/find.jpg); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 65px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_refresh {
+    background-image: url(/Images/buttonRefresh.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 95px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_reload {
+    background-image: url(/Images/buttonReload.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 90px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_export 
+{
+    background-image: url(/Images/excel.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 145px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_reset {
+    background-image: url(/Images/buttonReload.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 145px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_save {
+    background-image: url(/Images/buttonSave.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 80px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+input.button_email {
+    background-image: url(/Images/email.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 4px 4px;  /* equivalent to 'top left' */
+    border-style: solid;           /* assuming we don't want any borders */
+    border-color: Silver;
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 145px;
+    height: 25px;           /* make this the size of your image */
+    padding: 0px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    text-align: center;
+    font-size: small;
+    font-weight: normal;
+    position: relative;
+}
+
+.jqx-grid-cell-hover-arctic div a {
+    color: #ffffff;
+}
+
+.jqx-grid-cell-selected-arctic div a {
+    color: #ffffff;
+}
