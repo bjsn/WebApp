@@ -287,7 +287,7 @@ namespace Corspro.Data.External
 
                     if (existingUser != null)
                     {
-                        existingUser.Administrator = userDto.Administrator ? "Y" : "N";
+                        existingUser.Administrator = userDto.Administrator;
                         existingUser.FirstName = userDto.FirstName;
                         existingUser.LastName = userDto.LastName;
                         existingUser.LoginID = userDto.LoginID;
@@ -298,6 +298,32 @@ namespace Corspro.Data.External
 
                     result = sdaCloudEntities.SaveChanges();
 
+                    transactionScope.Complete();
+                }
+            }
+            return result;
+        }
+
+
+        /// <summary>
+        /// Updates the user.
+        /// </summary>
+        /// <param name="userDto">The user dto.</param>
+        /// <returns></returns>
+        public int UpdateUserLastCheckDT(UserDto userDto)
+        {
+            int result;
+            using (var sdaCloudEntities = new SDACloudEntities())
+            {
+                using (var transactionScope = new TransactionScope())
+                {
+                    var existingUser = sdaCloudEntities.Users.FirstOrDefault(i => i.UserID == userDto.UserId);
+
+                    if (existingUser != null)
+                    {
+                        existingUser.LastCheckDT = DateTime.UtcNow;
+                    }
+                    result = sdaCloudEntities.SaveChanges();
                     transactionScope.Complete();
                 }
             }
@@ -495,7 +521,7 @@ namespace Corspro.Data.External
                             FirstName = userDto.FirstName,
                             LastName = userDto.LastName,
                             ManagerUserID = userDto.ManagerUserID,
-                            Administrator = userDto.Administrator ? "Y" : "N",
+                            Administrator = userDto.Administrator,
                             DeleteInd = "N",
                             CloudLastUpdBy = userDto.CloudLastUpdBy,
                             CloudLastUpdDT = DateTime.UtcNow
@@ -511,7 +537,7 @@ namespace Corspro.Data.External
                             existingUser.FirstName = userDto.FirstName;
                             existingUser.LastName = userDto.LastName;
                             existingUser.ManagerUserID = userDto.ManagerUserID;
-                            existingUser.Administrator = userDto.Administrator ? "Y" : "N";
+                            existingUser.Administrator = userDto.Administrator;
                             existingUser.DeleteInd = "N";
                             existingUser.CloudLastUpdBy = userDto.CloudLastUpdBy;
                             existingUser.CloudLastUpdDT = DateTime.UtcNow;

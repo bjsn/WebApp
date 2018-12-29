@@ -31,7 +31,19 @@ namespace Corspro.Data.External
                         if (configurationListDL.Count > 0)
                         {
                             ConfigurationList = Mapper.Map<List<Configuration>, List<ConfigurationDto>>(configurationListDL);
-                            Mapper.AssertConfigurationIsValid();
+                            //Mapper.AssertConfigurationIsValid();
+                        }
+                    }
+                    else 
+                    {
+                        ConfigurationList = new List<ConfigurationDto>();
+                        var configurationListDL = sdaCloudEntities.Configurations.Where(i => i.Name.Equals(name)).ToList();
+                        Mapper.CreateMap<Configuration, ConfigurationDto>();
+
+                        if (configurationListDL.Count > 0)
+                        {
+                            ConfigurationList = Mapper.Map<List<Configuration>, List<ConfigurationDto>>(configurationListDL);
+                            //Mapper.AssertConfigurationIsValid();
                         }
                     }
                 }

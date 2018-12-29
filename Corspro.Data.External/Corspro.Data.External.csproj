@@ -88,6 +88,7 @@
     <Compile Include="QuoteDL.cs" />
     <Compile Include="UserDL.cs" />
     <Compile Include="AppVersionDL.cs" />
+    <Compile Include="UserMachineDataDL.cs" />
     <Compile Include="Utilitary.cs" />
   </ItemGroup>
   <ItemGroup>

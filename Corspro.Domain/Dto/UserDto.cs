@@ -28,14 +28,14 @@ namespace Corspro.Domain.Dto
         [DataMember]
         public int? ManagerUserID { get; set; }
 
-        [DataMember]
+        //[DataMember]
         public string ManagerUserName { get; set; }
 
         [DataMember]
-        public bool Administrator { get; set; }
+        public string Administrator { get; set; }
 
         [DataMember]
-        public bool DeleteInd { get; set; }
+        public string DeleteInd { get; set; }
 
         [DataMember]
         public int? CloudLastUpdBy { get; set; }

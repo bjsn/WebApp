@@ -870,9 +870,161 @@ namespace Corspro.Services
             return response;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public List<string> GetInterfaceByIdAndClientId(string userId, string clientId)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// possible results
+        /// Invalid – if no record was selected
+        /// ValidNoOppy – record was selected, (user.sdaoppmgmt is N or (user.sdaoppmgmt is null and (client.sdaoppmgmt is N or null))
+        /// ValidOppy - record was selected, (user.sdaoppmgmt is Y or (user.sdaoppmgmt is null and client.sdaoppmgmt is Y))
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public UserCloudStatusDto GetUserAppStatus(int clientId, int userId) 
+        {
+            UserCloudStatusDto userCloudStatusDto = new UserCloudStatusDto();
+            try 
+            {
+                var userBL = new UserBL();
+                var appVersionBL = new AppVersionBL();
+                var configurationBL = new ConfigurationBL();
+
+                UserDto userDto = new UserDto() 
+                {
+                    ClientId = clientId,
+                    UserId = userId
+                };
+                var user = userBL.GetUserByUserIDAndClientID(userDto);
+                var client = GetClientById(clientId);
+
+                if (user != null && client != null)
+                {
+                    userCloudStatusDto.ClientId = client.ClientId;
+                    userCloudStatusDto.UserId = user.UserId;
+                    if (!user.DeleteInd.Equals("Y"))
+                    {
+                        if (!string.IsNullOrEmpty(user.SDAOppMgmt) && !string.IsNullOrEmpty(client.SDAOppMgmt))
+                        {
+                            
+                            if ((user.SDAOppMgmt.ToUpper().Equals("N")) || (string.IsNullOrEmpty(user.SDAOppMgmt) && (String.IsNullOrEmpty(client.SDAOppMgmt) || client.SDAOppMgmt.Equals("N"))))
+                            {
+                                userCloudStatusDto.UserStatus = "ValidNoOppy";
+                            }
+                            else if (user.SDAOppMgmt.ToUpper().Equals("Y") || (string.IsNullOrEmpty(user.SDAOppMgmt) && client.SDAOppMgmt.Equals("Y")))
+                            {
+                                userCloudStatusDto.UserStatus = "Valid";
+                            }
+
+                            //getting application information
+                            string appVersion = appVersionBL.GetLatestSWVersion("SMDESKTOP");
+                            if (!string.IsNullOrEmpty(appVersion))
+                            {
+                                userCloudStatusDto.AppVersion = appVersion;
+                            }
+
+                            //getting configuration dates
+                            var ValidUserNextCheckHours = configurationBL.GetConfigurationListByName("ValidUserNextCheckHours").FirstOrDefault();
+                            var ValidUserNextCheckReqdDays = configurationBL.GetConfigurationListByName("ValidUserNextCheckReqDays").FirstOrDefault();
+                            if (ValidUserNextCheckHours != null)
+                            {
+                                userCloudStatusDto.ValidUserNextCheckHours = ValidUserNextCheckHours.Value.ToString();
+                            }
+                            if (ValidUserNextCheckReqdDays != null)
+                            {
+                                userCloudStatusDto.ValidUserNextCheckReqDays = ValidUserNextCheckReqdDays.Value.ToString();
+                            }
+                            //updating user last check datetime
+                            userBL.UpdateUserLastCheckDT(user);
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(userCloudStatusDto.UserStatus))
+                {
+                    userCloudStatusDto.UserStatus = "Invalid";
+                }
+            }
+            catch (Exception e) 
+            {
+                userCloudStatusDto.UserStatus = userCloudStatusDto.UserStatus + "Error: " + e.Message;
+            }
+            return userCloudStatusDto;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ClientID"></param>
+        /// <param name="UserID"></param>
+        /// <param name="WindowsUserName"></param>
+        /// <param name="MACAddress"></param>
+        /// <param name="VersionDotNet"></param>
+        /// <param name="VersionExcel"></param>
+        /// <param name="VersionWord"></param>
+        /// <param name="VersionSDA"></param>
+        /// <param name="VersionSalesManager"></param>
+        /// <param name="VersionWindows"></param>
+        /// <param name="InstallType"></param>
+        /// <param name="UserFullName"></param>
+        /// <param name="Email"></param>
+        /// <param name="CompanyLong"></param>
+        /// <param name="Title"></param>
+        /// <param name="Phone"></param>
+        /// <param name="UserTimeZone"></param>
+        /// <returns></returns>
+        public string UploadUserMachineData(int ClientID, int UserID, string WindowsUserName, string MACAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
+                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone) 
+        {
+            string ReturnMessage = "";
+            try
+            {
+                UserMachineDataDto UserMachineDataDto = new UserMachineDataDto()
+                {
+                    ClientID = ClientID,
+                    UserID = UserID,
+                    WindowsUserName = WindowsUserName,
+                    MACAddress = MACAddress,
+                    VersionDotNet = VersionDotNet,
+                    VersionExcel = VersionExcel,
+                    VersionWord = VersionWord,
+                    VersionSDA = VersionSDA,
+                    VersionSalesManager = VersionSalesManager,
+                    VersionWindows = VersionWindows,
+                    InstallType = InstallType,
+                    UserName = UserFullName,
+                    Email = Email,
+                    Company = CompanyLong,
+                    Title = Title,
+                    Phone = Phone,
+                    UserTimeZone = UserTimeZone
+                };
+
+                var UMDDL = new UserMachineDataBL();
+                var UserMachineData = UMDDL.GetUserMachineData(ClientID, UserID, WindowsUserName, MACAddress);
+                if (UserMachineData == null)
+                {
+                    UMDDL.AddUserMachineData(UserMachineDataDto);
+                }
+                else 
+                {
+                    UMDDL.UpdateUserMachineData(UserMachineDataDto);
+                }
+                ReturnMessage = "Ok";
+            }
+            catch (Exception e) 
+            {
+                ReturnMessage = "Error: shit " + e.Message + " " + e.InnerException;
+            }
+            return ReturnMessage;
         }
     }
 }

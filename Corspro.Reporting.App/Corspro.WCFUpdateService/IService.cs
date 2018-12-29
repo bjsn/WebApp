@@ -87,5 +87,12 @@ namespace Corspro.WCFUpdateService
         [OperationContract]
         Response SaveDocumentInformation(int clientId, int userId, string quoteId, string documentType, string filePlatformId, string sharedSavedLocation);
         //end new methods
+
+        [OperationContract]
+        UserCloudStatusDto GetUserAppStatus(int clientId, int userId);
+
+        [OperationContract]
+        string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
+                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone); 
     }
 }

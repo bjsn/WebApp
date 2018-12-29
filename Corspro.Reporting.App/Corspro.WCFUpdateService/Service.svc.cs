@@ -264,5 +264,19 @@ namespace Corspro.WCFUpdateService
             return new UpdateCRMDataService().SaveDocumentInformation(clientId, userId, quoteId, documentType, filePlatformId, sharedSavedLocation);
         }
         //end new methods
+
+        //SDA methods
+        public UserCloudStatusDto GetUserAppStatus(int clientId, int userId) 
+        {
+            return new UpdateCRMDataService().GetUserAppStatus(clientId, userId);
+        }
+
+        public string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
+                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone) 
+        {
+            return new UpdateCRMDataService().UploadUserMachineData(ClientId, UserId, WindowsUserName, MacAddress, VersionDotNet, VersionExcel, VersionWord, VersionSDA, VersionSalesManager, 
+                                             VersionWindows, InstallType, UserFullName, Email, CompanyLong, Title, Phone, UserTimeZone);
+        }
+        //end SDA methods
     }
 }

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\AppVersion.cs" />
     <Compile Include="Dto\ClientDefinedFieldDto.cs" />
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\ClientLoginDto.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Dto\RetrieveQuoteDto.cs" />
     <Compile Include="Dto\SearchOpportunityDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
+    <Compile Include="Dto\UserCloudStatusDto.cs" />
+    <Compile Include="Dto\UserMachineDataDto.cs" />
     <Compile Include="Dto\UserViewDto.cs" />
     <Compile Include="OutdatedQuoteException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

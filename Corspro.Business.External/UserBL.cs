@@ -135,6 +135,13 @@ namespace Corspro.Business.External
             return userDl.UpdateUser(userDto);
         }
 
+
+        public int UpdateUserLastCheckDT(UserDto userDto) 
+        {
+            var userDl = new UserDL();
+            return userDl.UpdateUserLastCheckDT(userDto);
+        }
+
         /// <summary>
         /// Updates the user field.
         /// </summary>

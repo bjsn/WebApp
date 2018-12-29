@@ -16,6 +16,11 @@ namespace Corspro.Services
         /// <returns></returns>
         Response Authenticate(ClientLoginDto pClientLoginDto);
 
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="cloudCRMXrefUpdDT"></param>
+        /// <returns></returns>
         Response GetCRMXRefUpdDT(int clientId, string cloudCRMXrefUpdDT);
 
         /// <summary>
@@ -157,5 +162,36 @@ namespace Corspro.Services
         /// <param name="quoteId"></param>
         /// <returns></returns>
         OpportunityDto GetOpportunityByQuoteId(string quoteId);
+
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        UserCloudStatusDto GetUserAppStatus(int clientId, int userId);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="ClientId"></param>
+        /// <param name="UserId"></param>
+        /// <param name="MacAddress"></param>
+        /// <param name="VersionDotNet"></param>
+        /// <param name="VersionExcel"></param>
+        /// <param name="VersionWord"></param>
+        /// <param name="VersionSDA"></param>
+        /// <param name="VersionSalesManager"></param>
+        /// <param name="VersionWindows"></param>
+        /// <param name="InstallType"></param>
+        /// <param name="UserFullName"></param>
+        /// <param name="Email"></param>
+        /// <param name="CompanyLong"></param>
+        /// <param name="Title"></param>
+        /// <param name="Phone"></param>
+        /// <param name="UserTimeZone"></param>
+        /// <returns></returns>
+        string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
+                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone); 
+
     }
 }

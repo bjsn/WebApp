@@ -23,6 +23,7 @@
           <EntitySet Name="Quote" EntityType="SDACloudModel.Store.Quote" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="TransactionLog" EntityType="SDACloudModel.Store.TransactionLog" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="User" EntityType="SDACloudModel.Store.User" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="UserMachineData" EntityType="SDACloudModel.Store.UserMachineData" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="UserView" EntityType="SDACloudModel.Store.UserView" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="opportunitygrid" EntityType="SDACloudModel.Store.opportunitygrid" store:Type="Views" store:Schema="TestSDA" store:Name="opportunitygrid">
             <DefiningQuery>SELECT
@@ -365,6 +366,33 @@
           <Property Name="RegistrationDT" Type="datetime" />
           <Property Name="LastCheckDT" Type="datetime" />
         </EntityType>
+        <EntityType Name="UserMachineData">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="WindowsUserName" />
+            <PropertyRef Name="MACAddress" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WindowsUserName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="MACAddress" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VersionDotNet" Type="varchar" MaxLength="50" />
+          <Property Name="VersionExcel" Type="varchar" MaxLength="50" />
+          <Property Name="VersionWord" Type="varchar" MaxLength="50" />
+          <Property Name="VersionSDA" Type="varchar" MaxLength="50" />
+          <Property Name="VersionSalesManager" Type="varchar" MaxLength="50" />
+          <Property Name="VersionWindows" Type="varchar" MaxLength="50" />
+          <Property Name="InstallType" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Company" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="UserTimeZone" Type="varchar" MaxLength="50" />
+          <Property Name="LastUpdDT" Type="datetime" />
+          <Property Name="CreateDT" Type="datetime" />
+        </EntityType>
         <EntityType Name="UserView">
           <Key>
             <PropertyRef Name="UserViewID" />
@@ -479,8 +507,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        
-        
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -528,6 +554,7 @@
             <End Role="Opportunity" EntitySet="Opportunities" />
           </AssociationSet>
           <EntitySet Name="opportunitygrids" EntityType="SDACloudModel.opportunitygrid" />
+          <EntitySet Name="UserMachineDatas" EntityType="SDACloudModel.UserMachineData" />
           </EntityContainer>
         <EntityType Name="AppVersion">
           <Key>
@@ -931,6 +958,33 @@
           <Property Type="String" Name="StageType" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Manager" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="UserMachineData">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="WindowsUserName" />
+            <PropertyRef Name="MACAddress" />
+          </Key>
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="WindowsUserName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MACAddress" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionDotNet" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionExcel" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionWord" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionSDA" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionSalesManager" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionWindows" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InstallType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Company" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserTimeZone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastUpdDT" />
+          <Property Type="DateTime" Name="CreateDT" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1283,6 +1337,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserMachineDatas">
+            <EntityTypeMapping TypeName="SDACloudModel.UserMachineData">
+              <MappingFragment StoreEntitySet="UserMachineData">
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="LastUpdDT" ColumnName="LastUpdDT" />
+                <ScalarProperty Name="UserTimeZone" ColumnName="UserTimeZone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="InstallType" ColumnName="InstallType" />
+                <ScalarProperty Name="VersionWindows" ColumnName="VersionWindows" />
+                <ScalarProperty Name="VersionSalesManager" ColumnName="VersionSalesManager" />
+                <ScalarProperty Name="VersionSDA" ColumnName="VersionSDA" />
+                <ScalarProperty Name="VersionWord" ColumnName="VersionWord" />
+                <ScalarProperty Name="VersionExcel" ColumnName="VersionExcel" />
+                <ScalarProperty Name="VersionDotNet" ColumnName="VersionDotNet" />
+                <ScalarProperty Name="MACAddress" ColumnName="MACAddress" />
+                <ScalarProperty Name="WindowsUserName" ColumnName="WindowsUserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1319,16 +1398,17 @@
         <EntityTypeShape EntityType="SDACloudModel.InterfaceXRef" Width="1.5" PointX="1.180132605684983" PointY="31.232460543155884" />
         <EntityTypeShape EntityType="SDACloudModel.Opportunity" Width="1.5" PointX="10.301367429225412" PointY="31.93276172873227" />
         <EntityTypeShape EntityType="SDACloudModel.OppStatu" Width="1.5" PointX="0.57317794141041944" PointY="24.286800038203037" />
-        <EntityTypeShape EntityType="SDACloudModel.Quote" Width="1.5" PointX="10.365137954412557" PointY="8.29008970050611" />
-        <EntityTypeShape EntityType="SDACloudModel.TransactionLog" Width="1.5" PointX="10.206547546296635" PointY="8.35203916223349" />
-        <EntityTypeShape EntityType="SDACloudModel.User" Width="1.5" PointX="11.275284301152119" PointY="9.05929555420731" />
+        <EntityTypeShape EntityType="SDACloudModel.Quote" Width="1.5" PointX="9.625" PointY="6.25" />
+        <EntityTypeShape EntityType="SDACloudModel.TransactionLog" Width="1.5" PointX="7.375" PointY="8.25" />
+        <EntityTypeShape EntityType="SDACloudModel.User" Width="1.5" PointX="11.625" PointY="4.5" />
         <EntityTypeShape EntityType="SDACloudModel.UserView" Width="1.5" PointX="1.3256982235823285" PointY="29.703171535256864" />
         <AssociationConnector Association="SDACloudModel.FK_Opp_Client" />
         <AssociationConnector Association="SDACloudModel.FK_User_Client" />
         <AssociationConnector Association="SDACloudModel.FK_Interface" />
         <AssociationConnector Association="SDACloudModel.FK_Opp_Quote" />
         <AssociationConnector Association="SDACloudModel.FK_Opp_Status" />
-        <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="11.414570683340809" PointY="5.1910670721861845" />
+        <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="13.625" PointY="4.5" />
+        <EntityTypeShape EntityType="SDACloudModel.UserMachineData" Width="1.5" PointX="3.0721370461732782" PointY="24.223240058973079" />
       </Diagram>
     </Diagrams>
   </Designer>
