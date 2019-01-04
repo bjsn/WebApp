@@ -10,14 +10,7 @@
           <EntitySet Name="Client" EntityType="SDACloudModel.Store.Client" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="ClientContent" EntityType="SDACloudModel.Store.ClientContent" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="ClientDefinedField" EntityType="SDACloudModel.Store.ClientDefinedField" store:Type="Tables" Schema="TestSDA" />
-          <EntitySet Name="ClientImportOption" EntityType="SDACloudModel.Store.ClientImportOption" store:Type="Tables" store:Schema="TestSDA" store:Name="ClientImportOption">
-            <DefiningQuery>SELECT
-      `ClientImportOption`.`ClientID`, 
-      `ClientImportOption`.`ImportOption`, 
-      `ClientImportOption`.`Status`, 
-      `ClientImportOption`.`UpdateDT`
-      FROM `ClientImportOption` AS `ClientImportOption`</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="ClientImportOption" EntityType="SDACloudModel.Store.ClientImportOption" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="ClientUpdateDB" EntityType="SDACloudModel.Store.ClientUpdateDB" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="Configuration" EntityType="SDACloudModel.Store.Configuration" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="DataTransferDT" EntityType="SDACloudModel.Store.DataTransferDT" store:Type="Tables" Schema="TestSDA" />
@@ -139,14 +132,12 @@
           <Property Name="Format" Type="varchar" MaxLength="45" />
           <Property Name="SDARangeName" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'def.TestSDA.ClientImportOption' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="ClientImportOption">
           <Key>
-            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" />
           <Property Name="ImportOption" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="UpdateDT" Type="datetime" />
@@ -1008,9 +999,10 @@
         </EntityType>
         <EntityType Name="ClientImportOption">
           <Key>
-            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
           <Property Type="String" Name="ImportOption" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="UpdateDT" />
@@ -1399,6 +1391,7 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ImportOption" ColumnName="ImportOption" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1449,7 +1442,7 @@
         <AssociationConnector Association="SDACloudModel.FK_Opp_Status" />
         <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="13.625" PointY="4.5" />
         <EntityTypeShape EntityType="SDACloudModel.UserMachineData" Width="1.5" PointX="3.0721370461732782" PointY="24.223240058973079" />
-        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="4.9784800787356129" PointY="29.730748577849358" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="5.5" PointY="30.75" />
       </Diagram>
     </Diagrams>
   </Designer>

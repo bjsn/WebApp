@@ -29,7 +29,7 @@ namespace Corspro.Business.External
             }
             catch (Exception e)
             {
-                return 0;
+                throw new Exception(e.Message);
             }
         }
     }

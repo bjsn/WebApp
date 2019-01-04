@@ -43,36 +43,39 @@ namespace Corspro.Data.External
             int result = 0;
             try
             {
-                using (var sdaCloudEntities = new SDACloudEntities())
+                using (SDACloudEntities SDACloudEntities = new SDACloudEntities())
                 {
-                    using (var transactionScope = new TransactionScope())
+                    using (SDACloudEntities)
                     {
-                        var existingEntity = sdaCloudEntities
-                                            .ClientImportOptions
-                                            .Where(i => i.ClientID == ClientId && i.ImportOption.Equals(ImportOption) /*&& i.Status.Equals(Status)*/)
-                                            .FirstOrDefault();
-
-                        if (existingEntity == null)
+                        using (TransactionScope transactionScope = new TransactionScope())
                         {
-                            existingEntity = new ClientImportOption() 
+                            var existingEntity = SDACloudEntities.ClientImportOptions.FirstOrDefault(i => i.ClientID == ClientId && i.ImportOption.Equals(ImportOption));
+                            if (existingEntity == null)
                             {
-                                ClientID = ClientId,
-                                ImportOption = ImportOption
-                            };
+                                ClientImportOption newEntity = new ClientImportOption()
+                                {
+                                    ClientID = ClientId,
+                                    ImportOption = ImportOption,
+                                    Status = Status
+                                };
+                                SDACloudEntities.ClientImportOptions.AddObject(newEntity);
+                                result = SDACloudEntities.SaveChanges();
+                                transactionScope.Complete();     
+                            }
+                            else
+                            {
+                                existingEntity.Status = Status;
+                                existingEntity.UpdateDT = DateTime.UtcNow;
+                                result = SDACloudEntities.SaveChanges();
+                                transactionScope.Complete();     
+                            }
                         }
-                        else 
-                        {
-                            existingEntity.Status = Status;
-                            existingEntity.UpdateDT = DateTime.UtcNow;
-                        }
-                        result = sdaCloudEntities.SaveChanges();
-                        transactionScope.Complete();
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
+                throw new Exception(e.Message + " " + e.InnerException.Message );
             }
             return result;
         }

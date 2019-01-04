@@ -1416,11 +1416,11 @@ namespace Corspro.Domain.External
         /// <summary>
         /// Create a new ClientImportOption object.
         /// </summary>
-        /// <param name="clientID">Initial value of the ClientID property.</param>
-        public static ClientImportOption CreateClientImportOption(global::System.Int32 clientID)
+        /// <param name="id">Initial value of the Id property.</param>
+        public static ClientImportOption CreateClientImportOption(global::System.Int32 id)
         {
             ClientImportOption clientImportOption = new ClientImportOption();
-            clientImportOption.ClientID = clientID;
+            clientImportOption.Id = id;
             return clientImportOption;
         }
 
@@ -1433,7 +1433,34 @@ namespace Corspro.Domain.External
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ClientID
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ClientID
         {
             get
             {
@@ -1441,18 +1468,15 @@ namespace Corspro.Domain.External
             }
             set
             {
-                if (_ClientID != value)
-                {
-                    OnClientIDChanging(value);
-                    ReportPropertyChanging("ClientID");
-                    _ClientID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ClientID");
-                    OnClientIDChanged();
-                }
+                OnClientIDChanging(value);
+                ReportPropertyChanging("ClientID");
+                _ClientID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClientID");
+                OnClientIDChanged();
             }
         }
-        private global::System.Int32 _ClientID;
-        partial void OnClientIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _ClientID;
+        partial void OnClientIDChanging(Nullable<global::System.Int32> value);
         partial void OnClientIDChanged();
     
         /// <summary>
