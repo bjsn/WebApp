@@ -10,6 +10,14 @@
           <EntitySet Name="Client" EntityType="SDACloudModel.Store.Client" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="ClientContent" EntityType="SDACloudModel.Store.ClientContent" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="ClientDefinedField" EntityType="SDACloudModel.Store.ClientDefinedField" store:Type="Tables" Schema="TestSDA" />
+          <EntitySet Name="ClientImportOption" EntityType="SDACloudModel.Store.ClientImportOption" store:Type="Tables" store:Schema="TestSDA" store:Name="ClientImportOption">
+            <DefiningQuery>SELECT
+      `ClientImportOption`.`ClientID`, 
+      `ClientImportOption`.`ImportOption`, 
+      `ClientImportOption`.`Status`, 
+      `ClientImportOption`.`UpdateDT`
+      FROM `ClientImportOption` AS `ClientImportOption`</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ClientUpdateDB" EntityType="SDACloudModel.Store.ClientUpdateDB" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="Configuration" EntityType="SDACloudModel.Store.Configuration" store:Type="Tables" Schema="TestSDA" />
           <EntitySet Name="DataTransferDT" EntityType="SDACloudModel.Store.DataTransferDT" store:Type="Tables" Schema="TestSDA" />
@@ -130,6 +138,18 @@
           <Property Name="ColumnHeader" Type="varchar" MaxLength="45" />
           <Property Name="Format" Type="varchar" MaxLength="45" />
           <Property Name="SDARangeName" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'def.TestSDA.ClientImportOption' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ClientImportOption">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ImportOption" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateDT" Type="datetime" />
         </EntityType>
         <EntityType Name="ClientUpdateDB">
           <Key>
@@ -555,6 +575,7 @@
           </AssociationSet>
           <EntitySet Name="opportunitygrids" EntityType="SDACloudModel.opportunitygrid" />
           <EntitySet Name="UserMachineDatas" EntityType="SDACloudModel.UserMachineData" />
+          <EntitySet Name="ClientImportOptions" EntityType="SDACloudModel.ClientImportOption" />
           </EntityContainer>
         <EntityType Name="AppVersion">
           <Key>
@@ -985,6 +1006,15 @@
           <Property Type="DateTime" Name="LastUpdDT" />
           <Property Type="DateTime" Name="CreateDT" />
         </EntityType>
+        <EntityType Name="ClientImportOption">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="ImportOption" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateDT" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1362,6 +1392,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ClientImportOptions">
+            <EntityTypeMapping TypeName="SDACloudModel.ClientImportOption">
+              <MappingFragment StoreEntitySet="ClientImportOption">
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ImportOption" ColumnName="ImportOption" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1409,6 +1449,7 @@
         <AssociationConnector Association="SDACloudModel.FK_Opp_Status" />
         <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="13.625" PointY="4.5" />
         <EntityTypeShape EntityType="SDACloudModel.UserMachineData" Width="1.5" PointX="3.0721370461732782" PointY="24.223240058973079" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="4.9784800787356129" PointY="29.730748577849358" />
       </Diagram>
     </Diagrams>
   </Designer>

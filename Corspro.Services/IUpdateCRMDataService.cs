@@ -191,7 +191,19 @@ namespace Corspro.Services
         /// <param name="UserTimeZone"></param>
         /// <returns></returns>
         string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
-                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone); 
+                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone);
 
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        string GetUserStatus(int clientId, int userId);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        List<ClientImportOptionDto> GetClientImportOptionListByClientId(int clientId);
     }
 }

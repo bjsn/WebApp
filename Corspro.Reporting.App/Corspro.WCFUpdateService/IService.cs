@@ -93,6 +93,15 @@ namespace Corspro.WCFUpdateService
 
         [OperationContract]
         string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
-                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone); 
+                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone);
+        
+        [OperationContract]
+        string GetUserStatus(int clientId, int userId);
+
+        [OperationContract]
+        List<ClientImportOptionDto> GetClientImportOptionListByClientId(int clientId);
+
+        [OperationContract]
+        int InsertClientImportOption(int ClientId, string ImportOption, string Status);
     }
 }

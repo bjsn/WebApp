@@ -1026,5 +1026,75 @@ namespace Corspro.Services
             }
             return ReturnMessage;
         }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public string GetUserStatus(int clientId, int userId)
+        {
+            string ReturnMessage = "";
+            var userBL = new UserBL();
+            try
+            {
+                UserDto user = new UserDto() 
+                {
+                    ClientId = clientId,
+                    UserId = userId
+                };
+                UserDto DTUser = userBL.GetUserByUserIDAndClientID(user);
+                if (DTUser == null) 
+                {
+                    ReturnMessage = "Invalid";
+                }
+                else if (DTUser.DeleteInd.Equals("Y"))
+                {
+                    ReturnMessage = "Deleted";
+                }
+                else 
+                {
+                     ReturnMessage = "Valid";
+                }
+            }
+            catch (Exception e) 
+            {
+                ReturnMessage = "Error: " + e.Message;
+            }
+            return ReturnMessage;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        public List<ClientImportOptionDto> GetClientImportOptionListByClientId(int clientId)
+        {
+            try
+            {
+                return new ClientImportOptionBL().GetListByClientId(clientId);
+            }
+            catch (Exception e) 
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="ClientId"></param>
+        /// <param name="ImportOption"></param>
+        /// <returns></returns>
+        public int InsertClientImportOption(int ClientId, string ImportOption, string Status)
+        {
+            try
+            {
+                return new ClientImportOptionBL().InsertClientImportOption(ClientId, ImportOption, Status);
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
     }
 }

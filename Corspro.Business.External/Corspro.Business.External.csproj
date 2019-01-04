@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientDefinedFieldBL.cs" />
+    <Compile Include="ClientImportOptionBL.cs" />
     <Compile Include="ClientLoginBL.cs" />
     <Compile Include="ClientUpdateDBBL.cs" />
     <Compile Include="ConfigurationBL.cs" />

@@ -394,6 +394,22 @@ namespace Corspro.Domain.External
             }
         }
         private ObjectSet<UserMachineData> _UserMachineDatas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ClientImportOption> ClientImportOptions
+        {
+            get
+            {
+                if ((_ClientImportOptions == null))
+                {
+                    _ClientImportOptions = base.CreateObjectSet<ClientImportOption>("ClientImportOptions");
+                }
+                return _ClientImportOptions;
+            }
+        }
+        private ObjectSet<ClientImportOption> _ClientImportOptions;
 
         #endregion
 
@@ -557,6 +573,14 @@ namespace Corspro.Domain.External
         public void AddToUserMachineDatas(UserMachineData userMachineData)
         {
             base.AddObject("UserMachineDatas", userMachineData);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ClientImportOptions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToClientImportOptions(ClientImportOption clientImportOption)
+        {
+            base.AddObject("ClientImportOptions", clientImportOption);
         }
 
         #endregion
@@ -1373,6 +1397,135 @@ namespace Corspro.Domain.External
         private global::System.String _SDARangeName;
         partial void OnSDARangeNameChanging(global::System.String value);
         partial void OnSDARangeNameChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SDACloudModel", Name="ClientImportOption")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ClientImportOption : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ClientImportOption object.
+        /// </summary>
+        /// <param name="clientID">Initial value of the ClientID property.</param>
+        public static ClientImportOption CreateClientImportOption(global::System.Int32 clientID)
+        {
+            ClientImportOption clientImportOption = new ClientImportOption();
+            clientImportOption.ClientID = clientID;
+            return clientImportOption;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ClientID
+        {
+            get
+            {
+                return _ClientID;
+            }
+            set
+            {
+                if (_ClientID != value)
+                {
+                    OnClientIDChanging(value);
+                    ReportPropertyChanging("ClientID");
+                    _ClientID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ClientID");
+                    OnClientIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ClientID;
+        partial void OnClientIDChanging(global::System.Int32 value);
+        partial void OnClientIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ImportOption
+        {
+            get
+            {
+                return _ImportOption;
+            }
+            set
+            {
+                OnImportOptionChanging(value);
+                ReportPropertyChanging("ImportOption");
+                _ImportOption = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImportOption");
+                OnImportOptionChanged();
+            }
+        }
+        private global::System.String _ImportOption;
+        partial void OnImportOptionChanging(global::System.String value);
+        partial void OnImportOptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> UpdateDT
+        {
+            get
+            {
+                return _UpdateDT;
+            }
+            set
+            {
+                OnUpdateDTChanging(value);
+                ReportPropertyChanging("UpdateDT");
+                _UpdateDT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UpdateDT");
+                OnUpdateDTChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _UpdateDT;
+        partial void OnUpdateDTChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdateDTChanged();
 
         #endregion
 
