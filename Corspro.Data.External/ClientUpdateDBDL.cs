@@ -129,7 +129,7 @@ namespace Corspro.Data.External
         /// <param name="DBFileUpdDT"></param>
         /// <param name="DBUploadedDt"></param>
         /// <returns></returns>
-        public ClientUpdateDBDto UpdateClientUpdateDB(int clientId, string fileName, string AWSID, string AWSFilePath,
+        public ClientUpdateDBDto UpdateClientUpdateDB(int ClientId, string FileName, string AWSID, string AWSFilePath,
                                                       string AWSFileName, string DBFileUpdDT, string DBUploadedDt, bool BetaVersion,
                                                       int UploaderClientID, int UploaderUserID, string UploaderUserName)
         {
@@ -139,7 +139,7 @@ namespace Corspro.Data.External
                 using (sdaCloudEntities)
                 {
                     ClientUpdateDB client = sdaCloudEntities.ClientUpdateDBs
-                                            .Where(i => i.ClientID == clientId && i.DBFileName == fileName)
+                                            .Where(i => i.ClientID == ClientId && i.DBFileName == FileName)
                                             .FirstOrDefault();
                     if (client != null)
                     {
@@ -149,6 +149,7 @@ namespace Corspro.Data.External
                             client.AWSFileName = AWSFileName;
                             client.AWSFileID = AWSID;
                             client.DBFileUpdDT = DateTime.Parse(DBFileUpdDT);
+                            client.DBUploadedDT = DateTime.Parse(DBUploadedDt);
                         }
                         else
                         {
@@ -156,9 +157,10 @@ namespace Corspro.Data.External
                             client.BetaAWSFileName = AWSFileName;
                             client.BetaAWSFileID = AWSID;
                             client.BetaDBFileUpdDT = DateTime.Parse(DBFileUpdDT);
+                            client.BetaUploaderClientID = UploaderClientID;
+                            client.BetaUploaderUserID = UploaderUserID;
+                            client.BetaUploaderUserName = UploaderUserName;
                         }
-                        client.DBUploadedDT = DateTime.Parse(DBUploadedDt);
-
                         client.UploaderClientID = UploaderClientID;
                         client.UploaderUserID = UploaderUserID;
                         client.UploaderUserName = UploaderUserName;

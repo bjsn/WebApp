@@ -328,5 +328,16 @@ namespace Corspro.WCFUpdateService
         }
 
         //end SDA methods
+
+        /// <summary>
+        /// method to add error messages to the cloud generated in any of the local applications
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="clientId"></param>
+        /// <param name="errorMessage"></param>
+        public void AddErrorLogMessage(int userId, int clientId, string errorMessage) 
+        {
+            new UpdateCRMDataService().AddErrorLogMessage(userId, clientId, errorMessage);
+        }
     }
 }

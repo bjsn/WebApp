@@ -64,10 +64,13 @@ namespace Corspro.Data.External
                             }
                             else
                             {
-                                existingEntity.Status = Status;
-                                existingEntity.UpdateDT = DateTime.UtcNow;
-                                result = SDACloudEntities.SaveChanges();
-                                transactionScope.Complete();     
+                                if (!existingEntity.Status.Equals(Status))
+                                {
+                                    existingEntity.Status = Status;
+                                    existingEntity.UpdateDT = DateTime.UtcNow;
+                                    result = SDACloudEntities.SaveChanges();
+                                    transactionScope.Complete();     
+                                }
                             }
                         }
                     }

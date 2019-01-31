@@ -110,6 +110,14 @@
           <Property Name="CRMData" Type="varchar" MaxLength="1" />
           <Property Name="ClientLongName" Type="varchar" MaxLength="45" />
           <Property Name="SDAOppMgmt" Type="varchar" MaxLength="45" />
+          <Property Name="DomainName" Type="varchar" MaxLength="45" />
+          <Property Name="UserLicenses" Type="int" />
+          <Property Name="AddedDT" Type="datetime" />
+          <Property Name="LostDT" Type="datetime" />
+          <Property Name="DeleteInd" Type="varchar" MaxLength="1" />
+          <Property Name="LastUpdDT" Type="datetime" />
+          <Property Name="LastUpdBy" Type="int" />
+          <Property Name="RetryHSUpdate" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientContent">
           <Key>
@@ -118,6 +126,8 @@
           </Key>
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="ContentClientID" Type="int" Nullable="false" />
+          <Property Name="LastUpdDT" Type="datetime" />
+          <Property Name="LastUpdBy" Type="int" />
         </EntityType>
         <EntityType Name="ClientDefinedField">
           <Key>
@@ -161,8 +171,11 @@
           <Property Name="BetaAWSFileName" Type="varchar" MaxLength="100" />
           <Property Name="BetaAWSFileID" Type="varchar" MaxLength="45" />
           <Property Name="BetaDBFileUpdDT" Type="datetime" />
-          <Property Name="UploaderClientID" Type="int" />
+          <Property Name="BetaUploaderClientID" Type="int" />
+          <Property Name="BetaUploaderUserID" Type="int" />
+          <Property Name="BetaUploaderUserName" Type="varchar" MaxLength="100" />
           <Property Name="UploaderUserID" Type="int" />
+          <Property Name="UploaderClientID" Type="int" />
           <Property Name="UploaderUserName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Configuration">
@@ -205,6 +218,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ClientID" Type="int" />
+          <Property Name="UserID" Type="int" />
           <Property Name="ErrorMessage" Type="varchar" MaxLength="400" />
           <Property Name="Record" Type="varchar" MaxLength="5000" />
           <Property Name="ProcessDT" Type="datetime" />
@@ -376,6 +390,7 @@
           <Property Name="SDAOppMgmt" Type="varchar" MaxLength="1" />
           <Property Name="RegistrationDT" Type="datetime" />
           <Property Name="LastCheckDT" Type="datetime" />
+          <Property Name="RetryHSUpdate" Type="bool" />
         </EntityType>
         <EntityType Name="UserMachineData">
           <Key>
@@ -530,11 +545,9 @@
           <EntitySet Name="Clients" EntityType="SDACloudModel.Client" />
           <EntitySet Name="ClientContents" EntityType="SDACloudModel.ClientContent" />
           <EntitySet Name="ClientDefinedFields" EntityType="SDACloudModel.ClientDefinedField" />
-          <EntitySet Name="ClientUpdateDBs" EntityType="SDACloudModel.ClientUpdateDB" />
           <EntitySet Name="Configurations" EntityType="SDACloudModel.Configuration" />
           <EntitySet Name="DataTransferDTs" EntityType="SDACloudModel.DataTransferDT" />
           <EntitySet Name="Documents" EntityType="SDACloudModel.Document" />
-          <EntitySet Name="ErrorLogs" EntityType="SDACloudModel.ErrorLog" />
           <EntitySet Name="EtilizeKeys" EntityType="SDACloudModel.EtilizeKey" />
           <EntitySet Name="Interfaces" EntityType="SDACloudModel.Interface" />
           <EntitySet Name="InterfaceXRefs" EntityType="SDACloudModel.InterfaceXRef" />
@@ -567,6 +580,8 @@
           <EntitySet Name="opportunitygrids" EntityType="SDACloudModel.opportunitygrid" />
           <EntitySet Name="UserMachineDatas" EntityType="SDACloudModel.UserMachineData" />
           <EntitySet Name="ClientImportOptions" EntityType="SDACloudModel.ClientImportOption" />
+          <EntitySet Name="ClientUpdateDBs" EntityType="SDACloudModel.ClientUpdateDB" />
+          <EntitySet Name="ErrorLogs" EntityType="SDACloudModel.ErrorLog" />
           </EntityContainer>
         <EntityType Name="AppVersion">
           <Key>
@@ -594,6 +609,14 @@
           <Property Type="String" Name="SDAOppMgmt" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Opportunities" Relationship="SDACloudModel.FK_Opp_Client" FromRole="Client" ToRole="Opportunity" />
           <NavigationProperty Name="Users" Relationship="SDACloudModel.FK_User_Client" FromRole="Client" ToRole="User" />
+          <Property Type="String" Name="DomainName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserLicenses" />
+          <Property Type="DateTime" Name="AddedDT" />
+          <Property Type="DateTime" Name="LostDT" />
+          <Property Type="String" Name="DeleteInd" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastUpdDT" />
+          <Property Type="Int32" Name="LastUpdBy" />
+          <Property Type="Boolean" Name="RetryHSUpdate" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientContent">
           <Key>
@@ -602,6 +625,8 @@
           </Key>
           <Property Type="Int32" Name="ClientID" Nullable="false" />
           <Property Type="Int32" Name="ContentClientID" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdDT" />
+          <Property Type="Int32" Name="LastUpdBy" />
         </EntityType>
         <EntityType Name="ClientDefinedField">
           <Key>
@@ -615,29 +640,6 @@
           <Property Type="String" Name="ColumnHeader" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Format" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SDARangeName" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ClientUpdateDB">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="ClientID" />
-          <Property Type="String" Name="DBFileName" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="DBDescription" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="AWSFlePath" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="AWSFileName" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="AWSFileID" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="DBFileUpdDT" Precision="0" />
-          <Property Type="DateTime" Name="DBUploadedDT" Precision="0" />
-          <Property Type="String" Name="DeleteInd" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="DBFileType" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="BetaAwsFilePath" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="BetaAWSFileName" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="BetaAWSFileID" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="BetaDBFileUpdDT" Precision="0" />
-          <Property Type="Int32" Name="UploaderClientID" />
-          <Property Type="Int32" Name="UploaderUserID" />
-          <Property Type="String" Name="UploaderUserName" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Configuration">
           <Key>
@@ -673,17 +675,6 @@
           <Property Type="DateTime" Name="CreatedDT" Precision="0" />
           <Property Type="Int32" Name="LastUpdatedBy" />
           <Property Type="DateTime" Name="LastUpdatedDT" Precision="0" />
-        </EntityType>
-        <EntityType Name="ErrorLog">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="ClientID" />
-          <Property Type="String" Name="ErrorMessage" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Record" MaxLength="5000" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="ProcessDT" Precision="0" />
-          <Property Type="String" Name="NoLongerSend" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="EtilizeKey">
           <Key>
@@ -858,6 +849,7 @@
           <Property Type="DateTime" Name="RegistrationDT" Precision="0" />
           <Property Type="DateTime" Name="LastCheckDT" Precision="0" />
           <NavigationProperty Name="Client" Relationship="SDACloudModel.FK_User_Client" FromRole="User" ToRole="Client" />
+          <Property Type="Boolean" Name="RetryHSUpdate" />
         </EntityType>
         <EntityType Name="UserView">
           <Key>
@@ -1007,6 +999,44 @@
           <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="UpdateDT" />
         </EntityType>
+        <EntityType Name="ClientUpdateDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="DBFileName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DBDescription" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWSFlePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWSFileName" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWSFileID" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DBFileUpdDT" />
+          <Property Type="DateTime" Name="DBUploadedDT" />
+          <Property Type="String" Name="DeleteInd" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DBFileType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BetaAwsFilePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BetaAWSFileName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BetaAWSFileID" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="BetaDBFileUpdDT" />
+          <Property Type="Int32" Name="BetaUploaderClientID" />
+          <Property Type="Int32" Name="BetaUploaderUserID" />
+          <Property Type="String" Name="BetaUploaderUserName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UploaderUserID" />
+          <Property Type="Int32" Name="UploaderClientID" />
+          <Property Type="String" Name="UploaderUserName" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="String" Name="ErrorMessage" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Record" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ProcessDT" />
+          <Property Type="String" Name="NoLongerSend" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1025,6 +1055,14 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="SDACloudModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="RetryHSUpdate" ColumnName="RetryHSUpdate" />
+                <ScalarProperty Name="LastUpdBy" ColumnName="LastUpdBy" />
+                <ScalarProperty Name="LastUpdDT" ColumnName="LastUpdDT" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="LostDT" ColumnName="LostDT" />
+                <ScalarProperty Name="AddedDT" ColumnName="AddedDT" />
+                <ScalarProperty Name="UserLicenses" ColumnName="UserLicenses" />
+                <ScalarProperty Name="DomainName" ColumnName="DomainName" />
                 <ScalarProperty Name="SDAOppMgmt" ColumnName="SDAOppMgmt" />
                 <ScalarProperty Name="ClientLongName" ColumnName="ClientLongName" />
                 <ScalarProperty Name="CRMData" ColumnName="CRMData" />
@@ -1043,6 +1081,8 @@
           <EntitySetMapping Name="ClientContents">
             <EntityTypeMapping TypeName="SDACloudModel.ClientContent">
               <MappingFragment StoreEntitySet="ClientContent">
+                <ScalarProperty Name="LastUpdBy" ColumnName="LastUpdBy" />
+                <ScalarProperty Name="LastUpdDT" ColumnName="LastUpdDT" />
                 <ScalarProperty Name="ContentClientID" ColumnName="ContentClientID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
               </MappingFragment>
@@ -1059,30 +1099,6 @@
                 <ScalarProperty Name="InterfaceXRefID" ColumnName="InterfaceXRefID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ClientDefinedFieldID" ColumnName="ClientDefinedFieldID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientUpdateDBs">
-            <EntityTypeMapping TypeName="SDACloudModel.ClientUpdateDB">
-              <MappingFragment StoreEntitySet="ClientUpdateDB">
-                <ScalarProperty Name="UploaderUserName" ColumnName="UploaderUserName" />
-                <ScalarProperty Name="UploaderUserID" ColumnName="UploaderUserID" />
-                <ScalarProperty Name="UploaderClientID" ColumnName="UploaderClientID" />
-                <ScalarProperty Name="BetaDBFileUpdDT" ColumnName="BetaDBFileUpdDT" />
-                <ScalarProperty Name="BetaAWSFileID" ColumnName="BetaAWSFileID" />
-                <ScalarProperty Name="BetaAWSFileName" ColumnName="BetaAWSFileName" />
-                <ScalarProperty Name="BetaAwsFilePath" ColumnName="BetaAwsFilePath" />
-                <ScalarProperty Name="DBFileType" ColumnName="DBFileType" />
-                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
-                <ScalarProperty Name="DBUploadedDT" ColumnName="DBUploadedDT" />
-                <ScalarProperty Name="DBFileUpdDT" ColumnName="DBFileUpdDT" />
-                <ScalarProperty Name="AWSFileID" ColumnName="AWSFileID" />
-                <ScalarProperty Name="AWSFileName" ColumnName="AWSFileName" />
-                <ScalarProperty Name="AWSFlePath" ColumnName="AWSFlePath" />
-                <ScalarProperty Name="DBDescription" ColumnName="DBDescription" />
-                <ScalarProperty Name="DBFileName" ColumnName="DBFileName" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1118,18 +1134,6 @@
                 <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ErrorLogs">
-            <EntityTypeMapping TypeName="SDACloudModel.ErrorLog">
-              <MappingFragment StoreEntitySet="ErrorLog">
-                <ScalarProperty Name="NoLongerSend" ColumnName="NoLongerSend" />
-                <ScalarProperty Name="ProcessDT" ColumnName="ProcessDT" />
-                <ScalarProperty Name="Record" ColumnName="Record" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1289,6 +1293,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SDACloudModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="RetryHSUpdate" ColumnName="RetryHSUpdate" />
                 <ScalarProperty Name="LastCheckDT" ColumnName="LastCheckDT" />
                 <ScalarProperty Name="RegistrationDT" ColumnName="RegistrationDT" />
                 <ScalarProperty Name="SDAOppMgmt" ColumnName="SDAOppMgmt" />
@@ -1395,6 +1400,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ClientUpdateDBs">
+            <EntityTypeMapping TypeName="SDACloudModel.ClientUpdateDB">
+              <MappingFragment StoreEntitySet="ClientUpdateDB">
+                <ScalarProperty Name="UploaderUserName" ColumnName="UploaderUserName" />
+                <ScalarProperty Name="UploaderClientID" ColumnName="UploaderClientID" />
+                <ScalarProperty Name="UploaderUserID" ColumnName="UploaderUserID" />
+                <ScalarProperty Name="BetaUploaderUserName" ColumnName="BetaUploaderUserName" />
+                <ScalarProperty Name="BetaUploaderUserID" ColumnName="BetaUploaderUserID" />
+                <ScalarProperty Name="BetaUploaderClientID" ColumnName="BetaUploaderClientID" />
+                <ScalarProperty Name="BetaDBFileUpdDT" ColumnName="BetaDBFileUpdDT" />
+                <ScalarProperty Name="BetaAWSFileID" ColumnName="BetaAWSFileID" />
+                <ScalarProperty Name="BetaAWSFileName" ColumnName="BetaAWSFileName" />
+                <ScalarProperty Name="BetaAwsFilePath" ColumnName="BetaAwsFilePath" />
+                <ScalarProperty Name="DBFileType" ColumnName="DBFileType" />
+                <ScalarProperty Name="DeleteInd" ColumnName="DeleteInd" />
+                <ScalarProperty Name="DBUploadedDT" ColumnName="DBUploadedDT" />
+                <ScalarProperty Name="DBFileUpdDT" ColumnName="DBFileUpdDT" />
+                <ScalarProperty Name="AWSFileID" ColumnName="AWSFileID" />
+                <ScalarProperty Name="AWSFileName" ColumnName="AWSFileName" />
+                <ScalarProperty Name="AWSFlePath" ColumnName="AWSFlePath" />
+                <ScalarProperty Name="DBDescription" ColumnName="DBDescription" />
+                <ScalarProperty Name="DBFileName" ColumnName="DBFileName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="SDACloudModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="NoLongerSend" ColumnName="NoLongerSend" />
+                <ScalarProperty Name="ProcessDT" ColumnName="ProcessDT" />
+                <ScalarProperty Name="Record" ColumnName="Record" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1420,15 +1465,13 @@
         <EntityTypeShape EntityType="SDACloudModel.AppVersion" Width="1.5" PointX="2.9872444043807889" PointY="30.580763950283064" />
         <EntityTypeShape EntityType="SDACloudModel.Client" Width="1.5" PointX="10.061835859930998" PointY="23.237054716440408" />
         <EntityTypeShape EntityType="SDACloudModel.ClientContent" Width="1.5" PointX="9.625" PointY="4.5" />
-        <EntityTypeShape EntityType="SDACloudModel.ClientDefinedField" Width="1.5" PointX="8.7753173898790582" PointY="21.785606945765021" />
-        <EntityTypeShape EntityType="SDACloudModel.ClientUpdateDB" Width="1.5" PointX="9.8153744739551918" PointY="27.896421847816754" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientDefinedField" Width="1.5" PointX="12.75" PointY="21" />
         <EntityTypeShape EntityType="SDACloudModel.Configuration" Width="1.5" PointX="7.5913821661804715" PointY="21.379674459518714" />
         <EntityTypeShape EntityType="SDACloudModel.DataTransferDT" Width="1.5" PointX="3.7872462849073329" PointY="10.950189535948535" />
         <EntityTypeShape EntityType="SDACloudModel.Document" Width="1.5" PointX="7" PointY="3.625" />
-        <EntityTypeShape EntityType="SDACloudModel.ErrorLog" Width="1.5" PointX="5.7128851011921116" PointY="22.036096642741978" />
-        <EntityTypeShape EntityType="SDACloudModel.EtilizeKey" Width="1.5" PointX="8.8032994516209229" PointY="14.326458594913808" />
-        <EntityTypeShape EntityType="SDACloudModel.Interface" Width="1.5" PointX="9.83125317368249" PointY="12.626771679439941" />
-        <EntityTypeShape EntityType="SDACloudModel.InterfaceXRef" Width="1.5" PointX="1.180132605684983" PointY="31.232460543155884" />
+        <EntityTypeShape EntityType="SDACloudModel.EtilizeKey" Width="1.5" PointX="6.875" PointY="14.5" />
+        <EntityTypeShape EntityType="SDACloudModel.Interface" Width="1.5" PointX="11" PointY="12.875" />
+        <EntityTypeShape EntityType="SDACloudModel.InterfaceXRef" Width="1.5" PointX="7.5" PointY="28" />
         <EntityTypeShape EntityType="SDACloudModel.Opportunity" Width="1.5" PointX="10.301367429225412" PointY="31.93276172873227" />
         <EntityTypeShape EntityType="SDACloudModel.OppStatu" Width="1.5" PointX="0.57317794141041944" PointY="24.286800038203037" />
         <EntityTypeShape EntityType="SDACloudModel.Quote" Width="1.5" PointX="9.625" PointY="6.25" />
@@ -1442,7 +1485,9 @@
         <AssociationConnector Association="SDACloudModel.FK_Opp_Status" />
         <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="13.625" PointY="4.5" />
         <EntityTypeShape EntityType="SDACloudModel.UserMachineData" Width="1.5" PointX="3.0721370461732782" PointY="24.223240058973079" />
-        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="5.5" PointY="30.75" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="6" PointY="31.5" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientUpdateDB" Width="1.5" PointX="7.125" PointY="10.625" />
+        <EntityTypeShape EntityType="SDACloudModel.ErrorLog" Width="1.5" PointX="4.625" PointY="19" />
       </Diagram>
     </Diagrams>
   </Designer>

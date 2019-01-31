@@ -912,39 +912,35 @@ namespace Corspro.Services
                     userCloudStatusDto.UserId = user.UserId;
                     if (!user.DeleteInd.Equals("Y"))
                     {
-                        if (!string.IsNullOrEmpty(user.SDAOppMgmt) && !string.IsNullOrEmpty(client.SDAOppMgmt))
+                        if ((Utilitary.SafeToUpper(user.SDAOppMgmt).Equals("N")) || (string.IsNullOrEmpty(Utilitary.SafeToUpper(user.SDAOppMgmt)) && (String.IsNullOrEmpty(client.SDAOppMgmt) || Utilitary.SafeToUpper(client.SDAOppMgmt).Equals("N"))))
                         {
-                            
-                            if ((user.SDAOppMgmt.ToUpper().Equals("N")) || (string.IsNullOrEmpty(user.SDAOppMgmt) && (String.IsNullOrEmpty(client.SDAOppMgmt) || client.SDAOppMgmt.Equals("N"))))
-                            {
-                                userCloudStatusDto.UserStatus = "ValidNoOppy";
-                            }
-                            else if (user.SDAOppMgmt.ToUpper().Equals("Y") || (string.IsNullOrEmpty(user.SDAOppMgmt) && client.SDAOppMgmt.Equals("Y")))
-                            {
-                                userCloudStatusDto.UserStatus = "Valid";
-                            }
-
-                            //getting application information
-                            string appVersion = appVersionBL.GetLatestSWVersion("SMDESKTOP");
-                            if (!string.IsNullOrEmpty(appVersion))
-                            {
-                                userCloudStatusDto.AppVersion = appVersion;
-                            }
-
-                            //getting configuration dates
-                            var ValidUserNextCheckHours = configurationBL.GetConfigurationListByName("ValidUserNextCheckHours").FirstOrDefault();
-                            var ValidUserNextCheckReqdDays = configurationBL.GetConfigurationListByName("ValidUserNextCheckReqDays").FirstOrDefault();
-                            if (ValidUserNextCheckHours != null)
-                            {
-                                userCloudStatusDto.ValidUserNextCheckHours = ValidUserNextCheckHours.Value.ToString();
-                            }
-                            if (ValidUserNextCheckReqdDays != null)
-                            {
-                                userCloudStatusDto.ValidUserNextCheckReqDays = ValidUserNextCheckReqdDays.Value.ToString();
-                            }
-                            //updating user last check datetime
-                            userBL.UpdateUserLastCheckDT(user);
+                            userCloudStatusDto.UserStatus = "ValidNoOppy";
                         }
+                        else if (Utilitary.SafeToUpper(user.SDAOppMgmt).Equals("Y") || (string.IsNullOrEmpty(user.SDAOppMgmt) && Utilitary.SafeToUpper(client.SDAOppMgmt).Equals("Y")))
+                        {
+                            userCloudStatusDto.UserStatus = "ValidOppy";
+                        }
+
+                        //getting application information
+                        string appVersion = appVersionBL.GetLatestSWVersion("SMDESKTOP");
+                        if (!string.IsNullOrEmpty(appVersion))
+                        {
+                            userCloudStatusDto.AppVersion = appVersion;
+                        }
+
+                        //getting configuration dates
+                        var ValidUserNextCheckHours = configurationBL.GetConfigurationListByName("ValidUserNextCheckHours").FirstOrDefault();
+                        var ValidUserNextCheckReqdDays = configurationBL.GetConfigurationListByName("ValidUserNextCheckReqDays").FirstOrDefault();
+                        if (ValidUserNextCheckHours != null)
+                        {
+                            userCloudStatusDto.ValidUserNextCheckHours = ValidUserNextCheckHours.Value.ToString();
+                        }
+                        if (ValidUserNextCheckReqdDays != null)
+                        {
+                            userCloudStatusDto.ValidUserNextCheckReqDays = ValidUserNextCheckReqdDays.Value.ToString();
+                        }
+                        //updating user last check datetime
+                        userBL.UpdateUserLastCheckDT(user);
                     }
                 }
 
@@ -1013,12 +1009,17 @@ namespace Corspro.Services
                 if (UserMachineData == null)
                 {
                     UMDDL.AddUserMachineData(UserMachineDataDto);
+                    ReturnMessage = "Inserted";
+                }
+                else if (!Utilitary.AreObjectsEquals(UserMachineData, UserMachineDataDto))
+                {
+                    UMDDL.UpdateUserMachineData(UserMachineDataDto);
+                    ReturnMessage = "Updated";
                 }
                 else 
                 {
-                    UMDDL.UpdateUserMachineData(UserMachineDataDto);
+                    ReturnMessage = "Nothing to update";
                 }
-                ReturnMessage = "Ok";
             }
             catch (Exception e) 
             {
@@ -1026,6 +1027,7 @@ namespace Corspro.Services
             }
             return ReturnMessage;
         }
+
 
         /// <summary>
         /// </summary>
@@ -1096,5 +1098,19 @@ namespace Corspro.Services
                 throw new Exception(e.Message);
             }
         }
+
+
+        public void AddErrorLogMessage(int userId, int clientId, string errorMessage) 
+        {
+            try
+            {
+                new ApplicationLogBL().AddErrorLogMessage(userId, clientId, errorMessage);
+            }
+            catch (Exception e) 
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

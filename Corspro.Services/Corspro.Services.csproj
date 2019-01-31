@@ -67,6 +67,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="UpdateCRMDataService.cs" />
+    <Compile Include="Utilitary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

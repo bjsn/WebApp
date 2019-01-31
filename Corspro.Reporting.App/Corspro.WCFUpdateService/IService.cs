@@ -103,5 +103,8 @@ namespace Corspro.WCFUpdateService
 
         [OperationContract]
         int InsertClientImportOption(int ClientId, string ImportOption, string Status);
+
+        [OperationContract]
+        void AddErrorLogMessage(int userId, int clientId, string errorMessage);
     }
 }

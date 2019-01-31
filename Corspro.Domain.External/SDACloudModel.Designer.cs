@@ -142,22 +142,6 @@ namespace Corspro.Domain.External
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ClientUpdateDB> ClientUpdateDBs
-        {
-            get
-            {
-                if ((_ClientUpdateDBs == null))
-                {
-                    _ClientUpdateDBs = base.CreateObjectSet<ClientUpdateDB>("ClientUpdateDBs");
-                }
-                return _ClientUpdateDBs;
-            }
-        }
-        private ObjectSet<ClientUpdateDB> _ClientUpdateDBs;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Configuration> Configurations
         {
             get
@@ -202,22 +186,6 @@ namespace Corspro.Domain.External
             }
         }
         private ObjectSet<Document> _Documents;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ErrorLog> ErrorLogs
-        {
-            get
-            {
-                if ((_ErrorLogs == null))
-                {
-                    _ErrorLogs = base.CreateObjectSet<ErrorLog>("ErrorLogs");
-                }
-                return _ErrorLogs;
-            }
-        }
-        private ObjectSet<ErrorLog> _ErrorLogs;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -410,6 +378,38 @@ namespace Corspro.Domain.External
             }
         }
         private ObjectSet<ClientImportOption> _ClientImportOptions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ClientUpdateDB> ClientUpdateDBs
+        {
+            get
+            {
+                if ((_ClientUpdateDBs == null))
+                {
+                    _ClientUpdateDBs = base.CreateObjectSet<ClientUpdateDB>("ClientUpdateDBs");
+                }
+                return _ClientUpdateDBs;
+            }
+        }
+        private ObjectSet<ClientUpdateDB> _ClientUpdateDBs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ErrorLog> ErrorLogs
+        {
+            get
+            {
+                if ((_ErrorLogs == null))
+                {
+                    _ErrorLogs = base.CreateObjectSet<ErrorLog>("ErrorLogs");
+                }
+                return _ErrorLogs;
+            }
+        }
+        private ObjectSet<ErrorLog> _ErrorLogs;
 
         #endregion
 
@@ -448,14 +448,6 @@ namespace Corspro.Domain.External
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ClientUpdateDBs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToClientUpdateDBs(ClientUpdateDB clientUpdateDB)
-        {
-            base.AddObject("ClientUpdateDBs", clientUpdateDB);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Configurations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToConfigurations(Configuration configuration)
@@ -477,14 +469,6 @@ namespace Corspro.Domain.External
         public void AddToDocuments(Document document)
         {
             base.AddObject("Documents", document);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ErrorLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToErrorLogs(ErrorLog errorLog)
-        {
-            base.AddObject("ErrorLogs", errorLog);
         }
     
         /// <summary>
@@ -581,6 +565,22 @@ namespace Corspro.Domain.External
         public void AddToClientImportOptions(ClientImportOption clientImportOption)
         {
             base.AddObject("ClientImportOptions", clientImportOption);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ClientUpdateDBs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToClientUpdateDBs(ClientUpdateDB clientUpdateDB)
+        {
+            base.AddObject("ClientUpdateDBs", clientUpdateDB);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ErrorLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToErrorLogs(ErrorLog errorLog)
+        {
+            base.AddObject("ErrorLogs", errorLog);
         }
 
         #endregion
@@ -737,10 +737,12 @@ namespace Corspro.Domain.External
         /// Create a new Client object.
         /// </summary>
         /// <param name="clientID">Initial value of the ClientID property.</param>
-        public static Client CreateClient(global::System.Int32 clientID)
+        /// <param name="retryHSUpdate">Initial value of the RetryHSUpdate property.</param>
+        public static Client CreateClient(global::System.Int32 clientID, global::System.Boolean retryHSUpdate)
         {
             Client client = new Client();
             client.ClientID = clientID;
+            client.RetryHSUpdate = retryHSUpdate;
             return client;
         }
 
@@ -1038,6 +1040,198 @@ namespace Corspro.Domain.External
         private global::System.String _SDAOppMgmt;
         partial void OnSDAOppMgmtChanging(global::System.String value);
         partial void OnSDAOppMgmtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DomainName
+        {
+            get
+            {
+                return _DomainName;
+            }
+            set
+            {
+                OnDomainNameChanging(value);
+                ReportPropertyChanging("DomainName");
+                _DomainName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DomainName");
+                OnDomainNameChanged();
+            }
+        }
+        private global::System.String _DomainName;
+        partial void OnDomainNameChanging(global::System.String value);
+        partial void OnDomainNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserLicenses
+        {
+            get
+            {
+                return _UserLicenses;
+            }
+            set
+            {
+                OnUserLicensesChanging(value);
+                ReportPropertyChanging("UserLicenses");
+                _UserLicenses = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserLicenses");
+                OnUserLicensesChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserLicenses;
+        partial void OnUserLicensesChanging(Nullable<global::System.Int32> value);
+        partial void OnUserLicensesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> AddedDT
+        {
+            get
+            {
+                return _AddedDT;
+            }
+            set
+            {
+                OnAddedDTChanging(value);
+                ReportPropertyChanging("AddedDT");
+                _AddedDT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AddedDT");
+                OnAddedDTChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _AddedDT;
+        partial void OnAddedDTChanging(Nullable<global::System.DateTime> value);
+        partial void OnAddedDTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LostDT
+        {
+            get
+            {
+                return _LostDT;
+            }
+            set
+            {
+                OnLostDTChanging(value);
+                ReportPropertyChanging("LostDT");
+                _LostDT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LostDT");
+                OnLostDTChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LostDT;
+        partial void OnLostDTChanging(Nullable<global::System.DateTime> value);
+        partial void OnLostDTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DeleteInd
+        {
+            get
+            {
+                return _DeleteInd;
+            }
+            set
+            {
+                OnDeleteIndChanging(value);
+                ReportPropertyChanging("DeleteInd");
+                _DeleteInd = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DeleteInd");
+                OnDeleteIndChanged();
+            }
+        }
+        private global::System.String _DeleteInd;
+        partial void OnDeleteIndChanging(global::System.String value);
+        partial void OnDeleteIndChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LastUpdDT
+        {
+            get
+            {
+                return _LastUpdDT;
+            }
+            set
+            {
+                OnLastUpdDTChanging(value);
+                ReportPropertyChanging("LastUpdDT");
+                _LastUpdDT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastUpdDT");
+                OnLastUpdDTChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LastUpdDT;
+        partial void OnLastUpdDTChanging(Nullable<global::System.DateTime> value);
+        partial void OnLastUpdDTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LastUpdBy
+        {
+            get
+            {
+                return _LastUpdBy;
+            }
+            set
+            {
+                OnLastUpdByChanging(value);
+                ReportPropertyChanging("LastUpdBy");
+                _LastUpdBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastUpdBy");
+                OnLastUpdByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LastUpdBy;
+        partial void OnLastUpdByChanging(Nullable<global::System.Int32> value);
+        partial void OnLastUpdByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean RetryHSUpdate
+        {
+            get
+            {
+                return _RetryHSUpdate;
+            }
+            set
+            {
+                OnRetryHSUpdateChanging(value);
+                ReportPropertyChanging("RetryHSUpdate");
+                _RetryHSUpdate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RetryHSUpdate");
+                OnRetryHSUpdateChanged();
+            }
+        }
+        private global::System.Boolean _RetryHSUpdate;
+        partial void OnRetryHSUpdateChanging(global::System.Boolean value);
+        partial void OnRetryHSUpdateChanged();
 
         #endregion
 
@@ -1172,6 +1366,54 @@ namespace Corspro.Domain.External
         private global::System.Int32 _ContentClientID;
         partial void OnContentClientIDChanging(global::System.Int32 value);
         partial void OnContentClientIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LastUpdDT
+        {
+            get
+            {
+                return _LastUpdDT;
+            }
+            set
+            {
+                OnLastUpdDTChanging(value);
+                ReportPropertyChanging("LastUpdDT");
+                _LastUpdDT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastUpdDT");
+                OnLastUpdDTChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LastUpdDT;
+        partial void OnLastUpdDTChanging(Nullable<global::System.DateTime> value);
+        partial void OnLastUpdDTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LastUpdBy
+        {
+            get
+            {
+                return _LastUpdBy;
+            }
+            set
+            {
+                OnLastUpdByChanging(value);
+                ReportPropertyChanging("LastUpdBy");
+                _LastUpdBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastUpdBy");
+                OnLastUpdByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LastUpdBy;
+        partial void OnLastUpdByChanging(Nullable<global::System.Int32> value);
+        partial void OnLastUpdByChanged();
 
         #endregion
 
@@ -1949,24 +2191,72 @@ namespace Corspro.Domain.External
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> UploaderClientID
+        public Nullable<global::System.Int32> BetaUploaderClientID
         {
             get
             {
-                return _UploaderClientID;
+                return _BetaUploaderClientID;
             }
             set
             {
-                OnUploaderClientIDChanging(value);
-                ReportPropertyChanging("UploaderClientID");
-                _UploaderClientID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UploaderClientID");
-                OnUploaderClientIDChanged();
+                OnBetaUploaderClientIDChanging(value);
+                ReportPropertyChanging("BetaUploaderClientID");
+                _BetaUploaderClientID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BetaUploaderClientID");
+                OnBetaUploaderClientIDChanged();
             }
         }
-        private Nullable<global::System.Int32> _UploaderClientID;
-        partial void OnUploaderClientIDChanging(Nullable<global::System.Int32> value);
-        partial void OnUploaderClientIDChanged();
+        private Nullable<global::System.Int32> _BetaUploaderClientID;
+        partial void OnBetaUploaderClientIDChanging(Nullable<global::System.Int32> value);
+        partial void OnBetaUploaderClientIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> BetaUploaderUserID
+        {
+            get
+            {
+                return _BetaUploaderUserID;
+            }
+            set
+            {
+                OnBetaUploaderUserIDChanging(value);
+                ReportPropertyChanging("BetaUploaderUserID");
+                _BetaUploaderUserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BetaUploaderUserID");
+                OnBetaUploaderUserIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _BetaUploaderUserID;
+        partial void OnBetaUploaderUserIDChanging(Nullable<global::System.Int32> value);
+        partial void OnBetaUploaderUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BetaUploaderUserName
+        {
+            get
+            {
+                return _BetaUploaderUserName;
+            }
+            set
+            {
+                OnBetaUploaderUserNameChanging(value);
+                ReportPropertyChanging("BetaUploaderUserName");
+                _BetaUploaderUserName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BetaUploaderUserName");
+                OnBetaUploaderUserNameChanged();
+            }
+        }
+        private global::System.String _BetaUploaderUserName;
+        partial void OnBetaUploaderUserNameChanging(global::System.String value);
+        partial void OnBetaUploaderUserNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1991,6 +2281,30 @@ namespace Corspro.Domain.External
         private Nullable<global::System.Int32> _UploaderUserID;
         partial void OnUploaderUserIDChanging(Nullable<global::System.Int32> value);
         partial void OnUploaderUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UploaderClientID
+        {
+            get
+            {
+                return _UploaderClientID;
+            }
+            set
+            {
+                OnUploaderClientIDChanging(value);
+                ReportPropertyChanging("UploaderClientID");
+                _UploaderClientID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UploaderClientID");
+                OnUploaderClientIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UploaderClientID;
+        partial void OnUploaderClientIDChanging(Nullable<global::System.Int32> value);
+        partial void OnUploaderClientIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2655,6 +2969,30 @@ namespace Corspro.Domain.External
         private Nullable<global::System.Int32> _ClientID;
         partial void OnClientIDChanging(Nullable<global::System.Int32> value);
         partial void OnClientIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserID;
+        partial void OnUserIDChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7178,6 +7516,30 @@ namespace Corspro.Domain.External
         private Nullable<global::System.DateTime> _LastCheckDT;
         partial void OnLastCheckDTChanging(Nullable<global::System.DateTime> value);
         partial void OnLastCheckDTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> RetryHSUpdate
+        {
+            get
+            {
+                return _RetryHSUpdate;
+            }
+            set
+            {
+                OnRetryHSUpdateChanging(value);
+                ReportPropertyChanging("RetryHSUpdate");
+                _RetryHSUpdate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RetryHSUpdate");
+                OnRetryHSUpdateChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _RetryHSUpdate;
+        partial void OnRetryHSUpdateChanging(Nullable<global::System.Boolean> value);
+        partial void OnRetryHSUpdateChanged();
 
         #endregion
 

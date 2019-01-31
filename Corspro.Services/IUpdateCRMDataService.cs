@@ -205,5 +205,12 @@ namespace Corspro.Services
         /// <param name="clientId"></param>
         /// <returns></returns>
         List<ClientImportOptionDto> GetClientImportOptionListByClientId(int clientId);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="clientId"></param>
+        /// <param name="errorMessage"></param>
+        void AddErrorLogMessage(int userId, int clientId, string errorMessage);
     }
 }

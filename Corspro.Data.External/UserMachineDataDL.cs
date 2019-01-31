@@ -32,7 +32,9 @@ namespace Corspro.Data.External
                                             .FirstOrDefault();
                         if (existingEntity != null)
                         {
-                            Mapper.CreateMap<UserMachineData, UserMachineDataDto>();
+                            Mapper.CreateMap<UserMachineData, UserMachineDataDto>()
+                                .ForMember(x => x.LastUpdDT, opt => opt.Ignore())
+                                .ForMember(x => x.CreateDT, opt => opt.Ignore());
                             var dto = Mapper.Map<UserMachineData, UserMachineDataDto>(existingEntity);
                             return dto;
                         }
@@ -84,7 +86,8 @@ namespace Corspro.Data.External
                                 Title = UserMachineDataDto.Title,
                                 Phone = UserMachineDataDto.Phone,
                                 UserTimeZone = UserMachineDataDto.UserTimeZone,
-                                CreateDT = DateTime.UtcNow
+                                CreateDT = DateTime.UtcNow,
+                                LastUpdDT = DateTime.UtcNow
                             };
                             sdaCloudEntities.UserMachineDatas.AddObject(existingEntity);
                             result = sdaCloudEntities.SaveChanges();
@@ -119,6 +122,19 @@ namespace Corspro.Data.External
                                            .FirstOrDefault();
                         if (existingEntity != null)
                         {
+                            existingEntity.VersionDotNet = UserMachineDataDto.VersionDotNet;
+                            existingEntity.VersionExcel = UserMachineDataDto.VersionExcel;
+                            existingEntity.VersionWord = UserMachineDataDto.VersionWord;
+                            existingEntity.VersionSDA = UserMachineDataDto.VersionSDA;
+                            existingEntity.VersionSalesManager = UserMachineDataDto.VersionSalesManager;
+                            existingEntity.VersionWindows = UserMachineDataDto.VersionWindows;
+                            existingEntity.InstallType = UserMachineDataDto.InstallType;
+                            existingEntity.UserName = UserMachineDataDto.UserName;
+                            existingEntity.Email = UserMachineDataDto.Email;
+                            existingEntity.Company = UserMachineDataDto.Company;
+                            existingEntity.Title = UserMachineDataDto.Title;
+                            existingEntity.Phone = UserMachineDataDto.Phone;
+                            existingEntity.UserTimeZone = UserMachineDataDto.UserTimeZone;
                             existingEntity.LastUpdDT = DateTime.UtcNow;
                             result = sdaCloudEntities.SaveChanges();
                             transactionScope.Complete();

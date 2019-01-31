@@ -58,6 +58,32 @@ namespace Corspro.Data.External
             return result;
         }
 
+
+        public bool AddErrorLogMessage(int userId, int clientId, string errorMessage)
+        {
+            bool result = false;
+            using (var sdaCloudEntities = new SDACloudEntities())
+            {
+                using (sdaCloudEntities)
+                {
+                    using (var transactionScope = new TransactionScope())
+                    {
+                        var errorLog = new ErrorLog
+                        {
+                            ClientID = clientId,
+                            UserID = userId,
+                            ErrorMessage = errorMessage,
+                            ProcessDT = DateTime.UtcNow
+                        };
+                        sdaCloudEntities.ErrorLogs.AddObject(errorLog);
+                        sdaCloudEntities.SaveChanges();
+                        transactionScope.Complete();
+                    }
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Adds the transaction message.
         /// </summary>
