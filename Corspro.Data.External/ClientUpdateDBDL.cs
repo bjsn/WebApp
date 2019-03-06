@@ -11,10 +11,35 @@ namespace Corspro.Data.External
 {
     public class ClientUpdateDBDL
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        public bool HasPermissionToUpload(int clientId, string fileName)
+        {
+            bool HasPermissionToUpload = false;
+            using (var sdaCloudEntities = new SDACloudEntities())
+            {
+                using (sdaCloudEntities)
+                {
+                    var clientBase = sdaCloudEntities.ClientUpdateDBs
+                                    .Where(i => i.ClientID == clientId && i.DBFileName == fileName)
+                                    .ToList();
+
+                    HasPermissionToUpload = (clientBase.Count > 0);
+                }
+            }
+            return HasPermissionToUpload;
+        }
+
+
         /// <summary>
         ///  0 = Normal user
         ///  1 = Administrator
         ///  2 = EndUser
+        ///  SDA 1.5.0.1
         /// </summary>
         /// <param name="clientId"></param>
         /// <returns></returns>
@@ -52,7 +77,12 @@ namespace Corspro.Data.External
                                                             (i.DBFileType == null || i.DBFileType == "")))
                                                        .ToList();
                     }
-                    Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBDto>();
+
+                    Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBDto>()
+                        .ForSourceMember(x => x.BetaUploaderClientID, opt => opt.Ignore())
+                        .ForSourceMember(x => x.BetaUploaderUserID, opt => opt.Ignore())
+                        .ForSourceMember(x => x.BetaUploaderUserName, opt => opt.Ignore());
+
                     if (clientUpdates != null)
                     {
                         clientBase = Mapper.Map<List<ClientUpdateDB>, List<ClientUpdateDBDto>>(clientUpdates);
@@ -62,6 +92,7 @@ namespace Corspro.Data.External
             }
             return clientBase;
         }
+
 
         /// <summary>
         /// </summary>
@@ -97,28 +128,7 @@ namespace Corspro.Data.External
             }
             return clientBase;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="clientId"></param>
-        /// <returns></returns>
-        public bool HasPermissionToUpload(int clientId, string fileName)
-        {
-            bool HasPermissionToUpload = false;
-            using (var sdaCloudEntities = new SDACloudEntities())
-            {
-                using (sdaCloudEntities)
-                {
-                    var clientBase = sdaCloudEntities.ClientUpdateDBs
-                                    .Where(i => i.ClientID == clientId && i.DBFileName == fileName)
-                                    .ToList();
-
-                    HasPermissionToUpload = (clientBase.Count > 0);
-                }
-            }
-            return HasPermissionToUpload;
-        }
+    
 
         /// <summary>
         /// </summary>
@@ -165,7 +175,11 @@ namespace Corspro.Data.External
                         client.UploaderUserID = UploaderUserID;
                         client.UploaderUserName = UploaderUserName;
 
-                        Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBDto>();
+                        Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBDto>()
+                          .ForSourceMember(x => x.BetaUploaderClientID, opt => opt.Ignore())
+                          .ForSourceMember(x => x.BetaUploaderUserID, opt => opt.Ignore())
+                          .ForSourceMember(x => x.BetaUploaderUserName, opt => opt.Ignore());
+
                         if (client != null)
                         {
                             clientBase = Mapper.Map<ClientUpdateDB, ClientUpdateDBDto>(client);
@@ -177,6 +191,7 @@ namespace Corspro.Data.External
             }
             return clientBase;
         }
+
 
         /// <summary>
         /// </summary>
@@ -222,6 +237,7 @@ namespace Corspro.Data.External
             return clientName;
         }
 
+
         /// <summary>
         /// </summary>
         /// <param name="clientId"></param>
@@ -235,7 +251,10 @@ namespace Corspro.Data.External
                 ClientUpdateDB client = sdaCloudEntities.ClientUpdateDBs
                                             .Where(i => i.ClientID == clientId && i.DBFileName == dbName)
                                             .SingleOrDefault();
-                Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBDto>();
+                Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBDto>()
+                      .ForSourceMember(x => x.BetaUploaderClientID, opt => opt.Ignore())
+                      .ForSourceMember(x => x.BetaUploaderUserID, opt => opt.Ignore())
+                      .ForSourceMember(x => x.BetaUploaderUserName, opt => opt.Ignore());
                 if (client != null)
                 {
                     clientUpdate = Mapper.Map<ClientUpdateDB, ClientUpdateDBDto>(client);
@@ -244,5 +263,83 @@ namespace Corspro.Data.External
             }
             return clientUpdate;
         }
+
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        public ClientUpdateDBBetaDto GetLastCloudDBFileUpdDTBeta(int clientId, string dbName)
+        {
+            ClientUpdateDBBetaDto clientUpdate = null;
+            using (var sdaCloudEntities = new SDACloudEntities())
+            {
+                ClientUpdateDB client = sdaCloudEntities.ClientUpdateDBs
+                                            .Where(i => i.ClientID == clientId && i.DBFileName == dbName)
+                                            .SingleOrDefault();
+                Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBBetaDto>();
+                if (client != null)
+                {
+                    clientUpdate = Mapper.Map<ClientUpdateDB, ClientUpdateDBBetaDto>(client);
+                    Mapper.AssertConfigurationIsValid();
+                }
+            }
+            return clientUpdate;
+        }
+
+
+        /// <summary>
+        ///  0 = Normal user
+        ///  1 = Administrator
+        ///  2 = EndUser
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        public List<ClientUpdateDBBetaDto> GetClientUpdateDBList(int clientId, int userType)
+        {
+            List<ClientUpdateDBBetaDto> clientBase = new List<ClientUpdateDBBetaDto>();
+            using (var sdaCloudEntities = new SDACloudEntities())
+            {
+                using (sdaCloudEntities)
+                {
+                    var clientUpdates = new List<ClientUpdateDB>();
+                    if (userType == 0)
+                    {
+                        clientUpdates = sdaCloudEntities
+                                        .ClientUpdateDBs
+                                        .Where(i => i.ClientID == clientId)
+                                        .ToList();
+                    }
+                    else if (userType == 1)
+                    {
+                        clientUpdates = sdaCloudEntities
+                                                    .ClientUpdateDBs
+                                                    .Where(i => (i.ClientID == 999999 &&
+                                                          (i.DBFileType == null || i.DBFileType == "" || i.DBFileType == "Admin")))
+                                                     .ToList();
+
+                        List<ClientUpdateDB> clientBaseContent = GetClientUpdateDBByClientContentId(clientId);
+                        clientUpdates.AddRange(clientBaseContent);
+                    }
+                    else if (userType == 2)
+                    {
+                        clientUpdates = sdaCloudEntities
+                                                      .ClientUpdateDBs
+                                                      .Where(i => (i.ClientID == 999999 &&
+                                                            (i.DBFileType == null || i.DBFileType == "")))
+                                                       .ToList();
+                    }
+                    Mapper.CreateMap<ClientUpdateDB, ClientUpdateDBBetaDto>();
+                    if (clientUpdates != null)
+                    {
+                        clientBase = Mapper.Map<List<ClientUpdateDB>, List<ClientUpdateDBBetaDto>>(clientUpdates);
+                        Mapper.AssertConfigurationIsValid();
+                    }
+                }
+            }
+            return clientBase;
+        }
+        
     }
 }

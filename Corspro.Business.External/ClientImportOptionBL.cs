@@ -21,11 +21,11 @@ namespace Corspro.Business.External
             }
         }
 
-        public int InsertClientImportOption(int ClientId, string ImportOption, string Status)
+        public int InsertClientImportOption(int ClientId, string ImportOption, DateTime PrincingUpdateDate)
         {
             try
             {
-                return new ClientImportOptionDL().InsertClientImportOption(ClientId, ImportOption, Status);
+                return new ClientImportOptionDL().InsertClientImportOption(ClientId, ImportOption, PrincingUpdateDate);
             }
             catch (Exception e)
             {

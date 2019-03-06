@@ -57,6 +57,7 @@
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\ClientImportOptionDto.cs" />
     <Compile Include="Dto\ClientLoginDto.cs" />
+    <Compile Include="Dto\ClientUpdateDBBetaDto.cs" />
     <Compile Include="Dto\ClientUpdateDBDto.cs" />
     <Compile Include="Dto\ConfigurationDto.cs" />
     <Compile Include="Dto\DisplayOppDto.cs" />

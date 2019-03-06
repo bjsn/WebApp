@@ -66,5 +66,15 @@ namespace Corspro.Domain.Dto
 
         [DataMember]
         public DateTime LastUpdDT { get; set; }
+
+        [DataMember]
+        public bool BetaApp { get; set; }
+        
+        [DataMember]
+        public bool BetaDB { get; set; }
+
+        [DataMember]
+        public string DBUpdateDT { get; set; }
+
     }
 }

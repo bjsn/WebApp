@@ -10,6 +10,7 @@ using Corspro.Domain.External;
 using MySql.Data.MySqlClient;
 using System.Reflection;
 
+
 namespace Corspro.Data.External
 {
     //define the global formatter

@@ -93,13 +93,6 @@ namespace Corspro.Services
 
         /// <summary>
         /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="userType"></param>
-        /// <returns></returns>
-        List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType);
-
-        /// <summary>
-        /// </summary>
         /// <param name="configurationListName"></param>
         /// <returns></returns>
         List<ConfigurationDto> GetConfigurationList(string configurationListName);
@@ -123,6 +116,28 @@ namespace Corspro.Services
         /// <param name="dbName"></param>
         /// <returns></returns>
         ClientUpdateDBDto GetLastCloudDBFileUpdDT(int clientId, string dbName);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userType"></param>
+        /// <returns></returns>
+        List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        Response GetLastCloudDBFileUpdDTBeta(int clientId, string dbName);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userType"></param>
+        /// <returns></returns>
+        Response GetClientUpdateDBList(int clientId, int userType);
+
 
         /// <summary>
         /// </summary>
@@ -191,7 +206,8 @@ namespace Corspro.Services
         /// <param name="UserTimeZone"></param>
         /// <returns></returns>
         string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
-                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone);
+                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone, bool BetaApp, bool BetaDB,
+                                    string DBUpdateDT);
 
         /// <summary>
         /// </summary>

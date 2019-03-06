@@ -366,7 +366,6 @@ namespace Corspro.Services
             {
                 response.Errors.Add(ex.Message);
             }
-
             return response;
         }
 
@@ -655,19 +654,7 @@ namespace Corspro.Services
             return clientDto;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="userType"></param>
-        /// <returns></returns>
-        public List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType)
-        {
-            var clientUpdateBL = new ClientUpdateDBBL();
-            List<ClientUpdateDBDto> ClientUpdateDBDtoList = clientUpdateBL.GetClientUpdateDB(clientId, userType);
-            return ClientUpdateDBDtoList;
-        }
-
+  
         /// <summary>
         /// 
         /// </summary>
@@ -689,22 +676,6 @@ namespace Corspro.Services
         {
             var clientUpdateBL = new ClientUpdateDBBL();
             return clientUpdateBL.HasPermissionToUpload(clientId, fileName);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="fileName"></param>
-        /// <param name="AWSid"></param>
-        /// <param name="AWSFilePath"></param>
-        /// <param name="AWSFileName"></param>
-        /// <param name="DBFileUpdDT"></param>
-        /// <param name="DBUploadedDt"></param>
-        public ClientUpdateDBDto UpdateClientUpdateDB(int clientId, string fileName, string AWSid, string AWSFilePath, string AWSFileName, string DBFileUpdDT,
-                                                      string DBUploadedDt, bool BetaVersion, int UploaderClientID, int UploaderUserID, string UploaderUserName)
-        {
-            var clientUpdateBL = new ClientUpdateDBBL();
-            return clientUpdateBL.UpdateClientUpdateDB(clientId, fileName, AWSid, AWSFilePath, AWSFileName, DBFileUpdDT, DBUploadedDt, BetaVersion, UploaderClientID, UploaderUserID, UploaderUserName);
         }
 
         /// <summary>
@@ -735,6 +706,7 @@ namespace Corspro.Services
         }
 
         /// <summary>
+        /// SDA version 1.5.0.1
         /// </summary>
         /// <param name="clientId"></param>
         /// <param name="dbName"></param>
@@ -744,6 +716,87 @@ namespace Corspro.Services
             var clientUpdateBL = new ClientUpdateDBBL();
             return clientUpdateBL.GetLastCloudDBFileUpdDT(clientId, dbName);
         }
+
+        /// <summary>
+        /// SDA version 1.5.0.1
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userType"></param>
+        /// <returns></returns>
+        public List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType)
+        {
+            var clientUpdateBL = new ClientUpdateDBBL();
+            List<ClientUpdateDBDto> ClientUpdateDBDtoList = clientUpdateBL.GetClientUpdateDB(clientId, userType);
+            return ClientUpdateDBDtoList;
+        }
+
+ 
+        /// <summary>
+        ///SDA version 1.6.0.0 or higer
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        public Response GetLastCloudDBFileUpdDTBeta(int clientId, string dbName)
+        {
+            Response response = new Response();
+            try
+            {
+                var clientUpdateBL = new ClientUpdateDBBL();
+                var LastCloudDBFile = clientUpdateBL.GetLastCloudDBFileUpdDTBeta(clientId, dbName);
+                string clientUpdateDbSerialized = JsonConvert.SerializeObject(LastCloudDBFile);
+                response.Results.Add(clientUpdateDbSerialized);
+            }
+            catch (Exception e) 
+            {
+                response.Errors.Add(e.Message);
+            }
+            return response;
+        }
+
+
+        /// <summary>
+        /// SDA version 1.6.0.0 or higer
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="userType"></param>
+        /// <returns></returns>
+        public Response GetClientUpdateDBList(int clientId, int userType)
+        {
+            Response response = new Response();
+            try
+            {
+                var clientUpdateBL = new ClientUpdateDBBL();
+                List<ClientUpdateDBBetaDto> ClientUpdateDBDtList = clientUpdateBL.GetClientUpdateDBList(clientId, userType).ToList();
+                string clientUpdateDbListSerialized = JsonConvert.SerializeObject(ClientUpdateDBDtList);
+                response.Results.Add(clientUpdateDbListSerialized);
+            }
+            catch (Exception e) 
+            {
+                response.Errors.Add(e.Message);
+            }
+            return response;
+        }
+
+
+        /// <summary>
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="fileName"></param>
+        /// <param name="AWSid"></param>
+        /// <param name="AWSFilePath"></param>
+        /// <param name="AWSFileName"></param>
+        /// <param name="DBFileUpdDT"></param>
+        /// <param name="DBUploadedDt"></param>
+        public ClientUpdateDBDto UpdateClientUpdateDB(int clientId, string fileName, string AWSid, string AWSFilePath, string AWSFileName, string DBFileUpdDT,
+                                                      string DBUploadedDt, bool BetaVersion, int UploaderClientID, int UploaderUserID, string UploaderUserName)
+        {
+            var clientUpdateBL = new ClientUpdateDBBL();
+            return clientUpdateBL.UpdateClientUpdateDB(clientId, fileName, AWSid, AWSFilePath, AWSFileName, DBFileUpdDT, DBUploadedDt, BetaVersion, UploaderClientID, UploaderUserID, UploaderUserName);
+        }
+
+       
+
 
         //new methods
         private string[] EncryptString(string i_MessageBytes)
@@ -978,7 +1031,8 @@ namespace Corspro.Services
         /// <param name="UserTimeZone"></param>
         /// <returns></returns>
         public string UploadUserMachineData(int ClientID, int UserID, string WindowsUserName, string MACAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
-                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone) 
+                                    string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone, bool BetaApp, bool BetaDB,
+                                    string DBUpdateDT) 
         {
             string ReturnMessage = "";
             try
@@ -1001,7 +1055,10 @@ namespace Corspro.Services
                     Company = CompanyLong,
                     Title = Title,
                     Phone = Phone,
-                    UserTimeZone = UserTimeZone
+                    UserTimeZone = UserTimeZone,
+                    BetaApp = BetaApp,
+                    BetaDB = BetaDB,
+                    DBUpdateDT = DBUpdateDT
                 };
 
                 var UMDDL = new UserMachineDataBL();
@@ -1087,11 +1144,11 @@ namespace Corspro.Services
         /// <param name="ClientId"></param>
         /// <param name="ImportOption"></param>
         /// <returns></returns>
-        public int InsertClientImportOption(int ClientId, string ImportOption, string Status)
+        public int InsertClientImportOption(int ClientId, string ImportOption, DateTime PrincingUpdateDate)
         {
             try
             {
-                return new ClientImportOptionBL().InsertClientImportOption(ClientId, ImportOption, Status);
+                return new ClientImportOptionBL().InsertClientImportOption(ClientId, ImportOption, PrincingUpdateDate);
             }
             catch (Exception e)
             {

@@ -8,7 +8,7 @@ namespace Corspro.Domain.Dto
 {
     [DataContract]
     [Serializable]
-    public class ClientUpdateDBDto
+    public class ClientUpdateDBBetaDto
     {
         [DataMember]
         public int Id { get; set; }
@@ -54,15 +54,15 @@ namespace Corspro.Domain.Dto
 
         [DataMember]
         public DateTime BetaDBFileUpdDT { get; set; }
-        
-        //[DataMember]
-        //public int BetaUploaderClientID { get; set; }
 
-        //[DataMember]
-        //public int BetaUploaderUserID { get; set; }
+        [DataMember]
+        public int BetaUploaderClientID { get; set; }
 
-        //[DataMember]
-        //public string BetaUploaderUserName { get; set; }
+        [DataMember]
+        public int BetaUploaderUserID { get; set; }
+
+        [DataMember]
+        public string BetaUploaderUserName { get; set; }
 
         [DataMember]
         public int UploaderClientID { get; set; }

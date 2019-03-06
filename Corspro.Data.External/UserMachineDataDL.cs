@@ -87,7 +87,10 @@ namespace Corspro.Data.External
                                 Phone = UserMachineDataDto.Phone,
                                 UserTimeZone = UserMachineDataDto.UserTimeZone,
                                 CreateDT = DateTime.UtcNow,
-                                LastUpdDT = DateTime.UtcNow
+                                LastUpdDT = DateTime.UtcNow,
+                                BetaApp = UserMachineDataDto.BetaApp,
+                                BetaDB = UserMachineDataDto.BetaDB,
+                                DBUpdateDT = UserMachineDataDto.DBUpdateDT
                             };
                             sdaCloudEntities.UserMachineDatas.AddObject(existingEntity);
                             result = sdaCloudEntities.SaveChanges();
@@ -136,6 +139,10 @@ namespace Corspro.Data.External
                             existingEntity.Phone = UserMachineDataDto.Phone;
                             existingEntity.UserTimeZone = UserMachineDataDto.UserTimeZone;
                             existingEntity.LastUpdDT = DateTime.UtcNow;
+                            existingEntity.BetaApp = UserMachineDataDto.BetaApp;
+                            existingEntity.BetaDB = UserMachineDataDto.BetaDB;
+                            existingEntity.DBUpdateDT = UserMachineDataDto.DBUpdateDT;
+
                             result = sdaCloudEntities.SaveChanges();
                             transactionScope.Complete();
                         }

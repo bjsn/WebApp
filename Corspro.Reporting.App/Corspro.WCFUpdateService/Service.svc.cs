@@ -1,6 +1,7 @@
 ﻿using Corspro.Domain;
 using Corspro.Domain.Dto;
 using Corspro.Services;
+using System;
 using System.Collections.Generic;
 
 namespace Corspro.WCFUpdateService
@@ -156,16 +157,7 @@ namespace Corspro.WCFUpdateService
             return dataService.GetClientNameByIdAndUserId(clientId, userId);
         }
 
-        /// <summary>
-        /// Service that returns a list of clientUpdates
-        /// </summary>
-        /// <param name="clientId"></param>
-        /// <returns></returns>
-        public List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType)
-        {
-            var dataService = new UpdateCRMDataService();
-            return dataService.GetClientUpdateDB(clientId, userType);
-        }
+     
 
         /// <summary>
         /// 
@@ -207,6 +199,44 @@ namespace Corspro.WCFUpdateService
             return dataService.UpdateClientUpdateDB(clientId, fileName, AWSid, AWSFilePath, AWSFileName, DBFileUpdDT, DBUploadedDt, BetaVersion, UploaderClientID, UploaderUserID, UploaderUserName);
         }
 
+
+        /// <summary>
+        /// Service that returns a list of clientUpdates
+        /// SDA version 1.5.0.1
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        public List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType)
+        {
+            var dataService = new UpdateCRMDataService();
+            return dataService.GetClientUpdateDB(clientId, userType);
+        }
+
+        /// <summary>
+        /// SDA version 1.5.0.1
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="dbName"></param>
+        public ClientUpdateDBDto GetLastCloudDBFileUpdDT(int clientId, string dbName)
+        {
+            var dataService = new UpdateCRMDataService();
+            return dataService.GetLastCloudDBFileUpdDT(clientId, dbName);
+        }
+
+        /// SDA version 1.6.0.0 or higer
+        public Response GetClientUpdateDBList(int clientId, int userType)
+        {
+            var dataService = new UpdateCRMDataService();
+            return dataService.GetClientUpdateDBList(clientId, userType);
+        }
+
+        /// SDA version 1.6.0.0 or higer
+        public Response GetLastCloudDBFileUpdDTBeta(int clientId, string dbName) 
+        {
+            var dataService = new UpdateCRMDataService();
+            return dataService.GetLastCloudDBFileUpdDTBeta(clientId, dbName);
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="userID"></param>
@@ -230,13 +260,9 @@ namespace Corspro.WCFUpdateService
         /// <summary>
         /// </summary>
         /// <param name="clientId"></param>
-        /// <param name="dbName"></param>
-        public ClientUpdateDBDto GetLastCloudDBFileUpdDT(int clientId, string dbName)
-        {
-            var dataService = new UpdateCRMDataService();
-            return dataService.GetLastCloudDBFileUpdDT(clientId, dbName);
-        }
-
+        /// <param name="userId"></param>
+        /// <param name="quoteID"></param>
+        /// <returns></returns>
         public Response GetQuoteByClientIdUserIdAndQuoteId(int clientId, int userId, string quoteID)
         {
             var dataService = new UpdateCRMDataService();
@@ -276,31 +302,35 @@ namespace Corspro.WCFUpdateService
             return new UpdateCRMDataService().GetUserAppStatus(clientId, userId);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="ClientId"></param>
-        /// <param name="UserId"></param>
-        /// <param name="WindowsUserName"></param>
-        /// <param name="MacAddress"></param>
-        /// <param name="VersionDotNet"></param>
-        /// <param name="VersionExcel"></param>
-        /// <param name="VersionWord"></param>
-        /// <param name="VersionSDA"></param>
-        /// <param name="VersionSalesManager"></param>
-        /// <param name="VersionWindows"></param>
-        /// <param name="InstallType"></param>
-        /// <param name="UserFullName"></param>
-        /// <param name="Email"></param>
-        /// <param name="CompanyLong"></param>
-        /// <param name="Title"></param>
-        /// <param name="Phone"></param>
-        /// <param name="UserTimeZone"></param>
-        /// <returns></returns>
+      /// <summary>
+      /// </summary>
+      /// <param name="ClientId"></param>
+      /// <param name="UserId"></param>
+      /// <param name="WindowsUserName"></param>
+      /// <param name="MacAddress"></param>
+      /// <param name="VersionDotNet"></param>
+      /// <param name="VersionExcel"></param>
+      /// <param name="VersionWord"></param>
+      /// <param name="VersionSDA"></param>
+      /// <param name="VersionSalesManager"></param>
+      /// <param name="VersionWindows"></param>
+      /// <param name="InstallType"></param>
+      /// <param name="UserFullName"></param>
+      /// <param name="Email"></param>
+      /// <param name="CompanyLong"></param>
+      /// <param name="Title"></param>
+      /// <param name="Phone"></param>
+      /// <param name="UserTimeZone"></param>
+      /// <param name="BetaApp"></param>
+      /// <param name="BetaDB"></param>
+      /// <param name="DBUpdateDT"></param>
+      /// <returns></returns>
         public string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
-                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone) 
+                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone, bool BetaApp, bool BetaDB,
+                                    string DBUpdateDT) 
         {
             return new UpdateCRMDataService().UploadUserMachineData(ClientId, UserId, WindowsUserName, MacAddress, VersionDotNet, VersionExcel, VersionWord, VersionSDA, VersionSalesManager, 
-                                             VersionWindows, InstallType, UserFullName, Email, CompanyLong, Title, Phone, UserTimeZone);
+                                             VersionWindows, InstallType, UserFullName, Email, CompanyLong, Title, Phone, UserTimeZone, BetaApp, BetaDB, DBUpdateDT);
         }
 
         /// <summary>
@@ -322,11 +352,10 @@ namespace Corspro.WCFUpdateService
             return new UpdateCRMDataService().GetClientImportOptionListByClientId(clientId);
         }
 
-        public int InsertClientImportOption(int ClientId, string ImportOption, string Status) 
+        public int InsertClientImportOption(int ClientId, string ImportOption, DateTime PrincingUpdateDate) 
         {
-            return new UpdateCRMDataService().InsertClientImportOption(ClientId, ImportOption, Status);
+            return new UpdateCRMDataService().InsertClientImportOption(ClientId, ImportOption, PrincingUpdateDate);
         }
-
         //end SDA methods
 
         /// <summary>

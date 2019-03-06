@@ -2,6 +2,7 @@
 using Corspro.Domain;
 using Corspro.Domain.Dto;
 using System.Collections.Generic;
+using System;
 
 namespace Corspro.WCFUpdateService
 {
@@ -53,9 +54,7 @@ namespace Corspro.WCFUpdateService
         [OperationContract]
         string GetClientNameByIdAndUserId(int clientId, int userId);
 
-        [OperationContract]
-        List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType);
-
+       
         [OperationContract]
         List<ConfigurationDto> GetConfigurationList(string configurationListName);
 
@@ -71,10 +70,26 @@ namespace Corspro.WCFUpdateService
         [OperationContract]
         void UpdateUserLastCheckDT(int userID, int clientID);
 
+        //SDA version 1.5.0.1
         [OperationContract]
         ClientUpdateDBDto GetLastCloudDBFileUpdDT(int clientId, string dbName);
 
-        //new methods
+        //SDA version 1.5.0.1
+        [OperationContract]
+        List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType);
+
+        //SDA version 1.6.0.0 or higer
+        [OperationContract]
+        Response GetLastCloudDBFileUpdDTBeta(int clientId, string dbName);
+
+        //SDA version 1.6.0.0 or higer
+        [OperationContract]
+        Response GetClientUpdateDBList(int clientId, int userType);
+
+
+        [OperationContract]
+        List<ClientImportOptionDto> GetClientImportOptionListByClientId(int clientId);
+    
         [OperationContract]
         List<string> GetInterfaceByIdAndClientId(int userId, int clientId);
 
@@ -93,16 +108,15 @@ namespace Corspro.WCFUpdateService
 
         [OperationContract]
         string UploadUserMachineData(int ClientId, int UserId, string WindowsUserName, string MacAddress, string VersionDotNet, string VersionExcel, string VersionWord, string VersionSDA, string VersionSalesManager,
-                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone);
+                                   string VersionWindows, string InstallType, string UserFullName, string Email, string CompanyLong, string Title, string Phone, string UserTimeZone, bool BetaApp, bool BetaDB,
+                                    string DBUpdateDT);
         
         [OperationContract]
         string GetUserStatus(int clientId, int userId);
 
-        [OperationContract]
-        List<ClientImportOptionDto> GetClientImportOptionListByClientId(int clientId);
 
         [OperationContract]
-        int InsertClientImportOption(int ClientId, string ImportOption, string Status);
+        int InsertClientImportOption(int ClientId, string ImportOption, DateTime PrincingUpdateDate);
 
         [OperationContract]
         void AddErrorLogMessage(int userId, int clientId, string errorMessage);

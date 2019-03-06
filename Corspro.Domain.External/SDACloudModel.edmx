@@ -150,6 +150,7 @@
           <Property Name="ClientID" Type="int" />
           <Property Name="ImportOption" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="PricingUpdateDT" Type="datetime" />
           <Property Name="UpdateDT" Type="datetime" />
         </EntityType>
         <EntityType Name="ClientUpdateDB">
@@ -418,6 +419,9 @@
           <Property Name="UserTimeZone" Type="varchar" MaxLength="50" />
           <Property Name="LastUpdDT" Type="datetime" />
           <Property Name="CreateDT" Type="datetime" />
+          <Property Name="BetaApp" Type="bool" />
+          <Property Name="BetaDB" Type="bool" />
+          <Property Name="DBUpdateDT" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserView">
           <Key>
@@ -578,10 +582,10 @@
             <End Role="Opportunity" EntitySet="Opportunities" />
           </AssociationSet>
           <EntitySet Name="opportunitygrids" EntityType="SDACloudModel.opportunitygrid" />
-          <EntitySet Name="UserMachineDatas" EntityType="SDACloudModel.UserMachineData" />
-          <EntitySet Name="ClientImportOptions" EntityType="SDACloudModel.ClientImportOption" />
           <EntitySet Name="ClientUpdateDBs" EntityType="SDACloudModel.ClientUpdateDB" />
           <EntitySet Name="ErrorLogs" EntityType="SDACloudModel.ErrorLog" />
+          <EntitySet Name="UserMachineDatas" EntityType="SDACloudModel.UserMachineData" />
+          <EntitySet Name="ClientImportOptions" EntityType="SDACloudModel.ClientImportOption" />
           </EntityContainer>
         <EntityType Name="AppVersion">
           <Key>
@@ -962,43 +966,6 @@
           <Property Type="String" Name="StageType" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Manager" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="UserMachineData">
-          <Key>
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="WindowsUserName" />
-            <PropertyRef Name="MACAddress" />
-          </Key>
-          <Property Type="Int32" Name="ClientID" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="WindowsUserName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="MACAddress" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="VersionDotNet" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="VersionExcel" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="VersionWord" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="VersionSDA" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="VersionSalesManager" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="VersionWindows" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="InstallType" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Company" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UserTimeZone" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="LastUpdDT" />
-          <Property Type="DateTime" Name="CreateDT" />
-        </EntityType>
-        <EntityType Name="ClientImportOption">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="ClientID" />
-          <Property Type="String" Name="ImportOption" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="UpdateDT" />
-        </EntityType>
         <EntityType Name="ClientUpdateDB">
           <Key>
             <PropertyRef Name="ID" />
@@ -1036,6 +1003,47 @@
           <Property Type="String" Name="Record" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="ProcessDT" />
           <Property Type="String" Name="NoLongerSend" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserMachineData">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="WindowsUserName" />
+            <PropertyRef Name="MACAddress" />
+          </Key>
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="WindowsUserName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MACAddress" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionDotNet" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionExcel" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionWord" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionSDA" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionSalesManager" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VersionWindows" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InstallType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Company" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserTimeZone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastUpdDT" />
+          <Property Type="DateTime" Name="CreateDT" />
+          <Property Type="Boolean" Name="BetaApp" />
+          <Property Type="Boolean" Name="BetaDB" />
+          <Property Type="String" Name="DBUpdateDT" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ClientImportOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClientID" />
+          <Property Type="String" Name="ImportOption" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="PricingUpdateDT" />
+          <Property Type="DateTime" Name="UpdateDT" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1364,42 +1372,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserMachineDatas">
-            <EntityTypeMapping TypeName="SDACloudModel.UserMachineData">
-              <MappingFragment StoreEntitySet="UserMachineData">
-                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
-                <ScalarProperty Name="LastUpdDT" ColumnName="LastUpdDT" />
-                <ScalarProperty Name="UserTimeZone" ColumnName="UserTimeZone" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Company" ColumnName="Company" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="InstallType" ColumnName="InstallType" />
-                <ScalarProperty Name="VersionWindows" ColumnName="VersionWindows" />
-                <ScalarProperty Name="VersionSalesManager" ColumnName="VersionSalesManager" />
-                <ScalarProperty Name="VersionSDA" ColumnName="VersionSDA" />
-                <ScalarProperty Name="VersionWord" ColumnName="VersionWord" />
-                <ScalarProperty Name="VersionExcel" ColumnName="VersionExcel" />
-                <ScalarProperty Name="VersionDotNet" ColumnName="VersionDotNet" />
-                <ScalarProperty Name="MACAddress" ColumnName="MACAddress" />
-                <ScalarProperty Name="WindowsUserName" ColumnName="WindowsUserName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientImportOptions">
-            <EntityTypeMapping TypeName="SDACloudModel.ClientImportOption">
-              <MappingFragment StoreEntitySet="ClientImportOption">
-                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ImportOption" ColumnName="ImportOption" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ClientUpdateDBs">
             <EntityTypeMapping TypeName="SDACloudModel.ClientUpdateDB">
               <MappingFragment StoreEntitySet="ClientUpdateDB">
@@ -1437,6 +1409,46 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMachineDatas">
+            <EntityTypeMapping TypeName="SDACloudModel.UserMachineData">
+              <MappingFragment StoreEntitySet="UserMachineData">
+                <ScalarProperty Name="DBUpdateDT" ColumnName="DBUpdateDT" />
+                <ScalarProperty Name="BetaDB" ColumnName="BetaDB" />
+                <ScalarProperty Name="BetaApp" ColumnName="BetaApp" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="LastUpdDT" ColumnName="LastUpdDT" />
+                <ScalarProperty Name="UserTimeZone" ColumnName="UserTimeZone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="InstallType" ColumnName="InstallType" />
+                <ScalarProperty Name="VersionWindows" ColumnName="VersionWindows" />
+                <ScalarProperty Name="VersionSalesManager" ColumnName="VersionSalesManager" />
+                <ScalarProperty Name="VersionSDA" ColumnName="VersionSDA" />
+                <ScalarProperty Name="VersionWord" ColumnName="VersionWord" />
+                <ScalarProperty Name="VersionExcel" ColumnName="VersionExcel" />
+                <ScalarProperty Name="VersionDotNet" ColumnName="VersionDotNet" />
+                <ScalarProperty Name="MACAddress" ColumnName="MACAddress" />
+                <ScalarProperty Name="WindowsUserName" ColumnName="WindowsUserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientImportOptions">
+            <EntityTypeMapping TypeName="SDACloudModel.ClientImportOption">
+              <MappingFragment StoreEntitySet="ClientImportOption">
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+                <ScalarProperty Name="PricingUpdateDT" ColumnName="PricingUpdateDT" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ImportOption" ColumnName="ImportOption" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1484,10 +1496,10 @@
         <AssociationConnector Association="SDACloudModel.FK_Opp_Quote" />
         <AssociationConnector Association="SDACloudModel.FK_Opp_Status" />
         <EntityTypeShape EntityType="SDACloudModel.opportunitygrid" Width="1.5" PointX="13.625" PointY="4.5" />
-        <EntityTypeShape EntityType="SDACloudModel.UserMachineData" Width="1.5" PointX="3.0721370461732782" PointY="24.223240058973079" />
-        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="6" PointY="31.5" />
         <EntityTypeShape EntityType="SDACloudModel.ClientUpdateDB" Width="1.5" PointX="7.125" PointY="10.625" />
         <EntityTypeShape EntityType="SDACloudModel.ErrorLog" Width="1.5" PointX="4.625" PointY="19" />
+        <EntityTypeShape EntityType="SDACloudModel.UserMachineData" Width="1.5" PointX="3" PointY="32.625" />
+        <EntityTypeShape EntityType="SDACloudModel.ClientImportOption" Width="1.5" PointX="10.892470981409993" PointY="31.505075946219765" />
       </Diagram>
     </Diagrams>
   </Designer>

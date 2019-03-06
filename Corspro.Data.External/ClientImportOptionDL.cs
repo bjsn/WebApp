@@ -38,7 +38,7 @@ namespace Corspro.Data.External
         }
 
 
-        public int InsertClientImportOption(int ClientId, string ImportOption, string Status)
+        public int InsertClientImportOption(int ClientId, string ImportOption, DateTime PrincingUpdateDate)
         {
             int result = 0;
             try
@@ -56,7 +56,9 @@ namespace Corspro.Data.External
                                 {
                                     ClientID = ClientId,
                                     ImportOption = ImportOption,
-                                    Status = Status
+                                    //if the PricingUpdateDT in minValue, insert a null
+                                    PricingUpdateDT = ((PrincingUpdateDate == DateTime.MinValue) ? (DateTime?)null : PrincingUpdateDate)
+                                    //Status = Status
                                 };
                                 SDACloudEntities.ClientImportOptions.AddObject(newEntity);
                                 result = SDACloudEntities.SaveChanges();
@@ -64,12 +66,14 @@ namespace Corspro.Data.External
                             }
                             else
                             {
-                                if (!existingEntity.Status.Equals(Status))
+                                if (existingEntity.PricingUpdateDT != PrincingUpdateDate && PrincingUpdateDate != DateTime.MinValue) 
                                 {
-                                    existingEntity.Status = Status;
+                                    //existingEntity.Status = Status;
                                     existingEntity.UpdateDT = DateTime.UtcNow;
+                                    //if the PricingUpdateDT in minValue, insert a null
+                                    existingEntity.PricingUpdateDT = ((PrincingUpdateDate == DateTime.MinValue) ? (DateTime?)null : PrincingUpdateDate);
                                     result = SDACloudEntities.SaveChanges();
-                                    transactionScope.Complete();     
+                                    transactionScope.Complete();    
                                 }
                             }
                         }

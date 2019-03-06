@@ -9,11 +9,7 @@ namespace Corspro.Business.External
 {
     public class ClientUpdateDBBL
     {
-        public List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType)
-        {
-            var clientUpdateDl = new ClientUpdateDBDL();
-            return clientUpdateDl.GetClientUpdateDB(clientId, userType);
-        }
+      
 
         public bool HasPermissionToUpload(int clientId, string fileName)
         {
@@ -34,10 +30,32 @@ namespace Corspro.Business.External
             return clientUpdateBL.GetClientNameByIdAndUserId(clientId, userId);
         }
 
+        public List<ClientUpdateDBDto> GetClientUpdateDB(int clientId, int userType)
+        {
+            var clientUpdateDl = new ClientUpdateDBDL();
+            return clientUpdateDl.GetClientUpdateDB(clientId, userType);
+        }
+
+        public List<ClientUpdateDBBetaDto> GetClientUpdateDBList(int clientId, int userType)
+        {
+            var clientUpdateDl = new ClientUpdateDBDL();
+            return clientUpdateDl.GetClientUpdateDBList(clientId, userType);
+        }
+
+
         public ClientUpdateDBDto GetLastCloudDBFileUpdDT(int clientId, string dbName)
         {
            var clientUpdateBL = new ClientUpdateDBDL();
-            return clientUpdateBL.GetLastCloudDBFileUpdDT(clientId, dbName);
+           return clientUpdateBL.GetLastCloudDBFileUpdDT(clientId, dbName);
         }
+
+        public ClientUpdateDBBetaDto GetLastCloudDBFileUpdDTBeta(int clientId, string dbName)
+        {
+            var clientUpdateBL = new ClientUpdateDBDL();
+            return clientUpdateBL.GetLastCloudDBFileUpdDTBeta(clientId, dbName);
+        }
+
+        
+        
     }
 }

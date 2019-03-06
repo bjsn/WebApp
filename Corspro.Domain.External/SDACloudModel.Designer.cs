@@ -350,38 +350,6 @@ namespace Corspro.Domain.External
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<UserMachineData> UserMachineDatas
-        {
-            get
-            {
-                if ((_UserMachineDatas == null))
-                {
-                    _UserMachineDatas = base.CreateObjectSet<UserMachineData>("UserMachineDatas");
-                }
-                return _UserMachineDatas;
-            }
-        }
-        private ObjectSet<UserMachineData> _UserMachineDatas;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ClientImportOption> ClientImportOptions
-        {
-            get
-            {
-                if ((_ClientImportOptions == null))
-                {
-                    _ClientImportOptions = base.CreateObjectSet<ClientImportOption>("ClientImportOptions");
-                }
-                return _ClientImportOptions;
-            }
-        }
-        private ObjectSet<ClientImportOption> _ClientImportOptions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<ClientUpdateDB> ClientUpdateDBs
         {
             get
@@ -410,6 +378,38 @@ namespace Corspro.Domain.External
             }
         }
         private ObjectSet<ErrorLog> _ErrorLogs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserMachineData> UserMachineDatas
+        {
+            get
+            {
+                if ((_UserMachineDatas == null))
+                {
+                    _UserMachineDatas = base.CreateObjectSet<UserMachineData>("UserMachineDatas");
+                }
+                return _UserMachineDatas;
+            }
+        }
+        private ObjectSet<UserMachineData> _UserMachineDatas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ClientImportOption> ClientImportOptions
+        {
+            get
+            {
+                if ((_ClientImportOptions == null))
+                {
+                    _ClientImportOptions = base.CreateObjectSet<ClientImportOption>("ClientImportOptions");
+                }
+                return _ClientImportOptions;
+            }
+        }
+        private ObjectSet<ClientImportOption> _ClientImportOptions;
 
         #endregion
 
@@ -552,22 +552,6 @@ namespace Corspro.Domain.External
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the UserMachineDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserMachineDatas(UserMachineData userMachineData)
-        {
-            base.AddObject("UserMachineDatas", userMachineData);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ClientImportOptions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToClientImportOptions(ClientImportOption clientImportOption)
-        {
-            base.AddObject("ClientImportOptions", clientImportOption);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the ClientUpdateDBs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToClientUpdateDBs(ClientUpdateDB clientUpdateDB)
@@ -581,6 +565,22 @@ namespace Corspro.Domain.External
         public void AddToErrorLogs(ErrorLog errorLog)
         {
             base.AddObject("ErrorLogs", errorLog);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserMachineDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserMachineDatas(UserMachineData userMachineData)
+        {
+            base.AddObject("UserMachineDatas", userMachineData);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ClientImportOptions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToClientImportOptions(ClientImportOption clientImportOption)
+        {
+            base.AddObject("ClientImportOptions", clientImportOption);
         }
 
         #endregion
@@ -1768,6 +1768,30 @@ namespace Corspro.Domain.External
         private global::System.String _Status;
         partial void OnStatusChanging(global::System.String value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PricingUpdateDT
+        {
+            get
+            {
+                return _PricingUpdateDT;
+            }
+            set
+            {
+                OnPricingUpdateDTChanging(value);
+                ReportPropertyChanging("PricingUpdateDT");
+                _PricingUpdateDT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PricingUpdateDT");
+                OnPricingUpdateDTChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PricingUpdateDT;
+        partial void OnPricingUpdateDTChanging(Nullable<global::System.DateTime> value);
+        partial void OnPricingUpdateDTChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8086,6 +8110,78 @@ namespace Corspro.Domain.External
         private Nullable<global::System.DateTime> _CreateDT;
         partial void OnCreateDTChanging(Nullable<global::System.DateTime> value);
         partial void OnCreateDTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> BetaApp
+        {
+            get
+            {
+                return _BetaApp;
+            }
+            set
+            {
+                OnBetaAppChanging(value);
+                ReportPropertyChanging("BetaApp");
+                _BetaApp = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BetaApp");
+                OnBetaAppChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _BetaApp;
+        partial void OnBetaAppChanging(Nullable<global::System.Boolean> value);
+        partial void OnBetaAppChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> BetaDB
+        {
+            get
+            {
+                return _BetaDB;
+            }
+            set
+            {
+                OnBetaDBChanging(value);
+                ReportPropertyChanging("BetaDB");
+                _BetaDB = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BetaDB");
+                OnBetaDBChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _BetaDB;
+        partial void OnBetaDBChanging(Nullable<global::System.Boolean> value);
+        partial void OnBetaDBChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DBUpdateDT
+        {
+            get
+            {
+                return _DBUpdateDT;
+            }
+            set
+            {
+                OnDBUpdateDTChanging(value);
+                ReportPropertyChanging("DBUpdateDT");
+                _DBUpdateDT = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DBUpdateDT");
+                OnDBUpdateDTChanged();
+            }
+        }
+        private global::System.String _DBUpdateDT;
+        partial void OnDBUpdateDTChanging(global::System.String value);
+        partial void OnDBUpdateDTChanged();
 
         #endregion
 
