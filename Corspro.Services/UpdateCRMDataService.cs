@@ -840,22 +840,29 @@ namespace Corspro.Services
                 UserId = userId
             };
             UserDto userByUserIDAndClientID = new UserBL().GetUserByUserIDAndClientID(clientLogin);
-            if (userByUserIDAndClientID.DeleteInd.ToString().ToUpper().Equals("Y"))
+            if (userByUserIDAndClientID != null)
             {
-                list.Add("Error: There is not user.");
-            }
-            else
-            {
-                InterfaceDto interfaceByClientId = new InterfaceBL().GetInterfaceByClientId(userByUserIDAndClientID.ClientId, "SharePoint");
-                if (interfaceByClientId == null)
+                if (userByUserIDAndClientID.DeleteInd.ToString().ToUpper().Equals("Y"))
                 {
-                    list.Add("Error: There is not Interface register yet.");
+                    list.Add("Error: There is not user.");
                 }
                 else
                 {
-                    list.Add(interfaceByClientId.InterfaceLogin);
-                    list.AddRange(this.EncryptString(interfaceByClientId.InterfacePwd));
+                    InterfaceDto interfaceByClientId = new InterfaceBL().GetInterfaceByClientId(userByUserIDAndClientID.ClientId, "SharePoint");
+                    if (interfaceByClientId == null)
+                    {
+                        list.Add("Error: There is not Interface register yet.");
+                    }
+                    else
+                    {
+                        list.Add(interfaceByClientId.InterfaceLogin);
+                        list.AddRange(this.EncryptString(interfaceByClientId.InterfacePwd));
+                    }
                 }
+            }
+            else 
+            {
+                list.Add("Error: There is not user.");
             }
             return list;
         }

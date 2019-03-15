@@ -115,7 +115,6 @@ namespace Corspro.Data.External
                         .ForMember(dest => dest.Administrator, opt => opt.MapFrom(src => src.Administrator.ToUpper() == "Y"))
                         .ForMember(dest => dest.DeleteInd, opt => opt.MapFrom(src => src.DeleteInd.ToUpper() == "Y"));
                     var person = Mapper.Map<User, UserDto>(existingUser);
-                    ////Mapper.AssertConfigurationIsValid();
                     return person;
                 }
             }
